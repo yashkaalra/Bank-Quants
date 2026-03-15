@@ -2,753 +2,523 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0a0e1a">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="theme-color" content="#1a2744">
 <title>QuantMaster — Bank Exam Practice</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════════════════════
-   DESIGN SYSTEM — QUANTMASTER
-   Theme: Deep Navy + Electric Teal + Crisp White
-   Font: Sora (display) + JetBrains Mono (numbers)
-═══════════════════════════════════════════════════════ */
-
+/* ═══════════════════════════════════════════
+   QUANTMASTER — PROFESSIONAL BANKING THEME
+   Clean Navy Blue · White · Slate · Amber
+   Target: IBPS / SBI / RBI Aspirants
+═══════════════════════════════════════════ */
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html{font-size:16px;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-
+html{font-size:16px;-webkit-text-size-adjust:100%}
 :root{
-  /* Core Palette */
-  --navy-deep:    #06091a;
-  --navy:         #0a0e1a;
-  --navy-mid:     #0f1628;
-  --navy-card:    #141b2d;
-  --navy-raised:  #1a2340;
-  --navy-border:  #1e2d4a;
-  --navy-hover:   #243354;
+  --blue-dk:  #0f1f3d;
+  --blue:     #1a2f5a;
+  --blue-md:  #1e3a6e;
+  --blue-lt:  #274d8f;
+  --blue-hl:  #1d4ed8;
+  --sky:      #3b82f6;
+  --sky-lt:   #eff6ff;
+  --sky-bd:   #bfdbfe;
 
-  /* Teal Accent */
-  --teal:         #00d4aa;
-  --teal-dim:     #00b892;
-  --teal-glow:    rgba(0,212,170,.15);
-  --teal-border:  rgba(0,212,170,.3);
+  --amber:    #d97706;
+  --amber-lt: #fef3c7;
+  --amber-bd: #fcd34d;
 
-  /* Coral/Orange accent for wrong answers, alerts */
-  --coral:        #ff6b6b;
-  --coral-dim:    rgba(255,107,107,.15);
+  --green:    #059669;
+  --green-lt: #ecfdf5;
+  --green-bd: #6ee7b7;
 
-  /* Gold for marks */
-  --gold:         #f0c040;
-  --gold-dim:     rgba(240,192,64,.15);
-  --gold-border:  rgba(240,192,64,.35);
+  --red:      #dc2626;
+  --red-lt:   #fef2f2;
+  --red-bd:   #fca5a5;
 
-  /* Violet for pattern/mains */
-  --violet:       #7c6cf0;
-  --violet-dim:   rgba(124,108,240,.15);
-  --violet-border:rgba(124,108,240,.3);
+  --slate:    #64748b;
+  --slate-lt: #f8fafc;
+  --slate-md: #e2e8f0;
+  --slate-dk: #334155;
 
-  /* Text */
-  --txt:          #e8edf8;
-  --txt-muted:    #8896b0;
-  --txt-faint:    #4a5568;
-  --txt-inverse:  #06091a;
+  --white:    #ffffff;
+  --bg:       #f0f4f8;
+  --bg2:      #e8edf5;
+  --card:     #ffffff;
+  --txt:      #0f172a;
+  --txt2:     #334155;
+  --txt3:     #64748b;
+  --txt4:     #94a3b8;
+  --border:   #cbd5e1;
+  --border2:  #e2e8f0;
 
-  /* Surfaces */
-  --surface:      #141b2d;
-  --surface-hi:   #1a2340;
-  --surface-lo:   #0f1628;
-
-  /* Semantic */
-  --success:      #00d4aa;
-  --success-bg:   rgba(0,212,170,.1);
-  --success-bd:   rgba(0,212,170,.35);
-  --error:        #ff6b6b;
-  --error-bg:     rgba(255,107,107,.1);
-  --error-bd:     rgba(255,107,107,.35);
-
-  /* UI */
-  --radius:       10px;
-  --radius-lg:    14px;
-  --radius-xl:    18px;
-  --touch:        48px;
-  --transition:   .18s cubic-bezier(.4,0,.2,1);
-
-  /* Fonts */
-  --font:         'Sora', system-ui, sans-serif;
-  --mono:         'JetBrains Mono', 'Courier New', monospace;
-}
-
-/* Light mode */
-body.light{
-  --navy-deep:    #f0f4ff;
-  --navy:         #f5f7ff;
-  --navy-mid:     #eef1fb;
-  --navy-card:    #ffffff;
-  --navy-raised:  #f8faff;
-  --navy-border:  #dde3f0;
-  --navy-hover:   #e8edfa;
-  --txt:          #0f172a;
-  --txt-muted:    #4a5568;
-  --txt-faint:    #94a3b8;
-  --surface:      #ffffff;
-  --surface-hi:   #f8faff;
-  --surface-lo:   #eef1fb;
-  --teal-glow:    rgba(0,180,140,.1);
+  --font:   'Plus Jakarta Sans', system-ui, sans-serif;
+  --mono:   'JetBrains Mono', 'Courier New', monospace;
+  --r:       8px;
+  --r2:     12px;
+  --r3:     16px;
+  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+  --shadow2:0 4px 12px rgba(0,0,0,.1);
+  --touch:  48px;
 }
 
 body{
-  font-family: var(--font);
-  background: var(--navy);
-  color: var(--txt);
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-  overflow-x: hidden;
-  /* Subtle dot grid background */
-  background-image: radial-gradient(circle, rgba(0,212,170,.06) 1px, transparent 1px);
-  background-size: 28px 28px;
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--txt);
+  min-height:100vh;
+  min-height:-webkit-fill-available;
+  overflow-x:hidden;
+}
+body.dark{
+  --bg:#0c1220;--bg2:#111827;--card:#1a2235;--txt:#f1f5f9;--txt2:#cbd5e1;
+  --txt3:#94a3b8;--txt4:#475569;--border:#2d3f5a;--border2:#1e2d42;
+  --slate-lt:#1a2235;--slate-md:#2d3f5a;--sky-lt:#0f1e38;--sky-bd:#1e3a6e;
+  --green-lt:#0a1f18;--green-bd:#065f46;--red-lt:#1f0a0a;--red-bd:#7f1d1d;
+  --amber-lt:#1f1300;--amber-bd:#78350f;
 }
 
 /* ── SCROLLBAR ── */
-::-webkit-scrollbar{width:4px;height:4px}
-::-webkit-scrollbar-track{background:var(--navy-mid)}
-::-webkit-scrollbar-thumb{background:var(--navy-border);border-radius:4px}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
 
-/* ── APP SHELL ── */
-#app{
-  max-width: 680px;
-  margin: 0 auto;
-  padding: 16px 14px;
-  padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
-}
+/* ── LAYOUT ── */
+#app{max-width:680px;margin:0 auto;padding:0 0 env(safe-area-inset-bottom,16px)}
 
 /* ── SCREENS ── */
 .sc{display:none}.sc.on{display:block}
 
-/* ── CARDS ── */
-.card{
-  background: var(--navy-card);
-  border: 1px solid var(--navy-border);
-  border-radius: var(--radius-lg);
-  padding: 18px;
-  position: relative;
+/* ── TOPBAR ── */
+.topbar{
+  background:var(--blue-dk);
+  padding:14px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:100;
+  border-bottom:1px solid rgba(255,255,255,.06);
 }
-.card-glow{
-  background: var(--navy-card);
-  border: 1px solid var(--teal-border);
-  border-radius: var(--radius-lg);
-  padding: 18px;
-  box-shadow: 0 0 0 1px var(--teal-border), inset 0 0 30px var(--teal-glow);
-}
+.topbar-brand{display:flex;align-items:center;gap:10px}
+.brand-icon{width:32px;height:32px;background:var(--blue-hl);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.brand-name{font-size:16px;font-weight:800;color:#fff;letter-spacing:-.02em}
+.brand-name span{color:var(--amber-bd)}
+.topbar-actions{display:flex;align-items:center;gap:8px}
+.topbar-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.8);padding:6px 12px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font);transition:.15s;min-height:34px;white-space:nowrap}
+.topbar-btn:active{background:rgba(255,255,255,.15)}
+.topbar-badge{background:var(--red);color:#fff;border-radius:10px;padding:1px 6px;font-size:10px;font-weight:700;margin-left:3px}
 
-/* ── BUTTONS ── */
-.btn{
-  cursor: pointer;
-  font-family: var(--font);
-  font-weight: 600;
-  font-size: 14px;
-  border: none;
-  outline: none;
-  border-radius: var(--radius);
-  padding: 10px 18px;
-  min-height: var(--touch);
-  transition: all var(--transition);
-  touch-action: manipulation;
-  -webkit-user-select: none;
-  user-select: none;
-  letter-spacing: .01em;
-}
-
-/* Primary — Teal fill */
-.btn-p{
-  background: var(--teal);
-  color: var(--txt-inverse);
-  box-shadow: 0 4px 20px rgba(0,212,170,.3);
-}
-.btn-p:hover,.btn-p:active{background: var(--teal-dim); box-shadow: 0 2px 10px rgba(0,212,170,.2);}
-
-/* Ghost — outline */
-.btn-g{
-  background: transparent;
-  border: 1px solid var(--navy-border);
-  color: var(--txt-muted);
-}
-.btn-g:hover,.btn-g:active{border-color: var(--teal); color: var(--teal);}
-
-/* Icon button */
-.btn-icon{
-  background: var(--surface-hi);
-  border: 1px solid var(--navy-border);
-  color: var(--txt-muted);
-  padding: 0;
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  cursor: pointer;
-  font-family: var(--font);
-  transition: all var(--transition);
-  touch-action: manipulation;
-  flex-shrink: 0;
-}
-.btn-icon:hover,.btn-icon:active{border-color: var(--teal); color: var(--teal);}
-
-/* ── TAGS ── */
-.tag{
-  display: inline-flex;
-  align-items: center;
-  padding: 3px 10px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-}
-.tag-teal{background: var(--teal-glow); color: var(--teal); border: 1px solid var(--teal-border);}
-.tag-violet{background: var(--violet-dim); color: var(--violet); border: 1px solid var(--violet-border);}
-.tag-gold{background: var(--gold-dim); color: var(--gold); border: 1px solid var(--gold-border);}
-.tag-muted{background: var(--navy-raised); color: var(--txt-muted); border: 1px solid var(--navy-border);}
-
-/* ── ANIMATIONS ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
-@keyframes slideIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
-.fi{animation:fadeUp .25s ease forwards}
-.sk{animation:shake .35s ease}
-
-/* ── SCOREBOARD ── */
-.score-grid{
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 8px;
-  margin-bottom: 16px;
-}
-.score-box{
-  background: var(--navy-card);
-  border: 1px solid var(--navy-border);
-  border-radius: var(--radius);
-  padding: 10px 8px;
-  text-align: center;
-}
-.score-val{font-size: 20px; font-weight: 700; font-family: var(--mono); line-height:1}
-.score-lbl{font-size: 10px; color: var(--txt-faint); margin-top: 4px; font-weight: 500; letter-spacing:.04em; text-transform:uppercase}
-
-/* ── MODULE TABS ── */
-.mod-tabs{
-  display: flex;
-  gap: 6px;
-  margin-bottom: 16px;
-  overflow-x: auto;
-  padding-bottom: 2px;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-.mod-tabs::-webkit-scrollbar{display:none}
-.mod-tab{
-  white-space: nowrap;
-  padding: 9px 16px;
-  border-radius: var(--radius);
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  border: 1px solid var(--navy-border);
-  background: var(--navy-card);
-  color: var(--txt-muted);
-  transition: all var(--transition);
-  font-family: var(--font);
-  min-height: 40px;
-  touch-action: manipulation;
-  letter-spacing: .01em;
-}
-.mod-tab.on{
-  background: var(--teal);
-  border-color: var(--teal);
-  color: var(--txt-inverse);
-  box-shadow: 0 2px 12px rgba(0,212,170,.25);
-}
-
-/* ── QUESTION BOX ── */
-.qbox{
-  font-family: var(--mono);
-  font-size: 17px;
-  line-height: 1.9;
-  color: var(--txt);
-  background: var(--navy-mid);
-  border: 1px solid var(--navy-border);
-  border-radius: var(--radius);
-  padding: 16px 18px;
-  margin-bottom: 16px;
-  white-space: pre-wrap;
-  word-break: break-word;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  letter-spacing: .02em;
-}
-
-/* ── OPTION BUTTONS ── */
-.opts-grid{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 16px;
-}
-.opt{
-  padding: 14px 16px;
-  border-radius: var(--radius);
-  text-align: left;
-  font-size: 15px;
-  font-weight: 500;
-  font-family: var(--mono);
-  cursor: pointer;
-  border: 1.5px solid var(--navy-border);
-  background: var(--navy-card);
-  color: var(--txt-muted);
-  transition: all var(--transition);
-  width: 100%;
-  min-height: var(--touch);
-  touch-action: manipulation;
-  line-height: 1.4;
-  word-break: break-word;
-  -webkit-user-select: none;
-  user-select: none;
-}
-.opt:hover,.opt:active{border-color: var(--teal); color: var(--txt); background: var(--teal-glow);}
-.opt.sel{border-color: var(--teal); color: var(--txt); background: rgba(0,212,170,.08);}
-.opt.cor{background: var(--success-bg); border-color: var(--success); color: var(--success);}
-.opt.wrg{background: var(--error-bg); border-color: var(--error); color: var(--error);}
-.opt.dim{color: var(--txt-faint); cursor: default; border-color: var(--navy-border);}
-.opt-letter{color: var(--txt-faint); margin-right: 10px; font-size: 12px;}
-
-/* ── SOLUTION BOX ── */
-.sol-wrap{
-  background: linear-gradient(135deg, rgba(0,212,170,.06) 0%, rgba(0,212,170,.02) 100%);
-  border: 1px solid var(--success-bd);
-  border-radius: var(--radius);
-  padding: 16px;
-  margin-top: 4px;
-  animation: fadeUp .3s ease;
-}
-.sol-title{
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--teal);
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  letter-spacing: .02em;
-  text-transform: uppercase;
-}
-.sol-step{
-  font-size: 13px;
-  color: var(--txt-muted);
-  padding: 5px 0 5px 14px;
-  border-left: 2px solid var(--navy-border);
-  margin-bottom: 5px;
-  line-height: 1.65;
-  word-break: break-word;
-  font-family: var(--font);
-}
-.sol-step.tk{border-left-color: var(--gold); color: var(--gold);}
-.sol-step.hl{border-left-color: var(--violet); color: #a89cf5;}
-.sol-ans{
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid var(--navy-border);
-  font-size: 13px;
-  color: var(--txt-muted);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.sol-ans-val{
-  font-family: var(--mono);
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--teal);
-  background: var(--teal-glow);
-  padding: 3px 12px;
-  border-radius: 6px;
-  border: 1px solid var(--teal-border);
-}
-
-/* ── SERIES CHIPS ── */
-.chips-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
-.chip{
-  padding: 5px 11px;
-  border-radius: 6px;
-  font-family: var(--mono);
-  font-size: 13px;
-  background: var(--navy-raised);
-  border: 1px solid var(--navy-border);
-  color: var(--txt-muted);
-  font-weight: 500;
-}
-.chip.hi{background: var(--success-bg); border-color: var(--success); color: var(--success);}
-.chip.er{background: var(--error-bg); border-color: var(--error); color: var(--error);}
-.dchip{
-  padding: 3px 9px;
-  border-radius: 5px;
-  font-family: var(--mono);
-  font-size: 12px;
-  background: var(--violet-dim);
-  border: 1px solid var(--violet-border);
-  color: var(--violet);
-  font-weight: 500;
-}
-.chips-lbl{font-size: 11px; color: var(--txt-faint); margin-bottom: 5px; font-weight: 600; letter-spacing:.04em; text-transform:uppercase}
-
-/* ── TIMER ── */
-.timer-wrap{display:flex;align-items:center;gap:8px}
-.timer-track{width:80px;height:5px;background:var(--navy-border);border-radius:3px;overflow:hidden;flex-shrink:0}
-.timer-fill{height:100%;border-radius:3px;transition:width .5s,background .5s}
-.timer-txt{font-family:var(--mono);font-size:14px;font-weight:700;min-width:30px}
-
-/* ── LEVEL / MODE SELECTORS ── */
-.sel-btn{
-  padding: 10px 8px;
-  border-radius: var(--radius);
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  border: 1.5px solid var(--navy-border);
-  background: var(--navy-card);
-  color: var(--txt-muted);
-  transition: all var(--transition);
-  flex: 1;
-  text-align: center;
-  font-family: var(--font);
-  min-height: var(--touch);
-  touch-action: manipulation;
-}
-.sel-btn.on-teal{border-color:var(--teal);background:var(--teal-glow);color:var(--teal);}
-.sel-btn.on-violet{border-color:var(--violet);background:var(--violet-dim);color:var(--violet);}
-.sel-btn.on-gold{border-color:var(--gold);background:var(--gold-dim);color:var(--gold);}
-
-/* ── MODULE HOME CARDS ── */
-.mod-card{
-  padding: 16px;
-  text-align: left;
-  border-radius: var(--radius-lg);
-  border: 1.5px solid var(--navy-border);
-  background: var(--navy-card);
-  cursor: pointer;
-  transition: all var(--transition);
-  font-family: var(--font);
-  min-height: 90px;
-  touch-action: manipulation;
-}
-.mod-card:hover,.mod-card:active{border-color:var(--teal);background:var(--teal-glow);}
-.mod-card.on{border-color:var(--teal);background:var(--teal-glow);box-shadow:0 0 0 1px var(--teal-border);}
-.mod-icon{font-size:22px;margin-bottom:8px;line-height:1}
-.mod-label{font-size:13px;font-weight:600;color:var(--txt-muted)}
-.mod-card.on .mod-label{color:var(--teal)}
-
-/* ── REFERENCE ITEMS ── */
-.ref-item{background:var(--navy-raised);border-radius:6px;padding:5px 9px;font-size:12px;font-family:var(--mono);color:var(--txt-muted);font-weight:500}
-.ref-item.bl{background:var(--teal-glow);border:1px solid var(--teal-border);color:var(--teal)}
-.ref-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:5px}
-
-/* ── RANGE INPUT ── */
-input[type=range]{width:100%;accent-color:var(--teal);cursor:pointer;height:22px}
-
-/* ── PATTERN BADGE ── */
-.pat-badge{
-  display:inline-flex;align-items:center;
-  padding:3px 10px;border-radius:20px;
-  font-size:11px;font-weight:600;letter-spacing:.03em;
-  background:var(--violet-dim);color:var(--violet);
-  border:1px solid var(--violet-border);margin-top:5px;
-}
-
-/* ── HOME HERO ── */
-.hero{
-  text-align: center;
-  padding: 28px 16px 22px;
-}
-.hero-icon{
-  width: 64px; height: 64px;
-  background: var(--teal-glow);
-  border: 1px solid var(--teal-border);
-  border-radius: 18px;
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 16px;
-  font-size: 28px;
-}
-.hero-title{
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--txt);
-  letter-spacing: -.03em;
-  margin-bottom: 6px;
-  line-height: 1.1;
-}
-.hero-title span{color: var(--teal)}
-.hero-sub{font-size: 13px; color: var(--txt-faint); font-weight: 500; letter-spacing:.02em}
+/* ── CONTENT AREA ── */
+.content{padding:16px}
 
 /* ── SECTION LABEL ── */
-.sec-lbl{
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--txt-faint);
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  margin-bottom: 10px;
-}
+.sec{font-size:11px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+
+/* ── CARDS ── */
+.card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r2);padding:16px;box-shadow:var(--shadow)}
+.card+.card{margin-top:10px}
+
+/* ── BUTTONS ── */
+.btn{cursor:pointer;font-family:var(--font);font-weight:600;font-size:14px;border:none;outline:none;border-radius:var(--r);padding:11px 20px;min-height:var(--touch);transition:.15s;touch-action:manipulation;-webkit-user-select:none;user-select:none;letter-spacing:.01em;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.btn-primary{background:var(--blue-hl);color:#fff;box-shadow:0 2px 8px rgba(29,78,216,.3)}
+.btn-primary:active{background:var(--blue-lt)}
+.btn-success{background:var(--green);color:#fff}
+.btn-ghost{background:transparent;border:1.5px solid var(--border);color:var(--txt2)}
+.btn-ghost:active{border-color:var(--blue-hl);color:var(--blue-hl)}
+.btn-amber{background:var(--amber);color:#fff}
+.btn-sm{font-size:12px;padding:7px 12px;min-height:34px;border-radius:6px}
+.btn-full{width:100%;border-radius:var(--r2)}
+
+/* ── MODULE GRID ── */
+.mod-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.mod-card{background:var(--card);border:2px solid var(--border2);border-radius:var(--r2);padding:16px 14px;cursor:pointer;transition:.15s;font-family:var(--font);touch-action:manipulation;text-align:left;box-shadow:var(--shadow)}
+.mod-card:active{transform:scale(.98)}
+.mod-card.sel{border-color:var(--blue-hl);background:var(--sky-lt)}
+.mod-card.sel .mc-label{color:var(--blue-hl)}
+.mc-icon{font-size:20px;margin-bottom:8px;display:block}
+.mc-label{font-size:13px;font-weight:700;color:var(--txt2)}
+.mc-desc{font-size:11px;color:var(--txt4);margin-top:3px;font-weight:500}
+
+/* ── SEL BUTTONS (level/mode) ── */
+.sel-row{display:flex;gap:6px}
+.sel-btn{flex:1;padding:10px 6px;border-radius:var(--r);font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--card);color:var(--txt3);transition:.15s;font-family:var(--font);min-height:42px;touch-action:manipulation;text-align:center}
+.sel-btn.on-blue{border-color:var(--blue-hl);background:var(--sky-lt);color:var(--blue-hl)}
+.sel-btn.on-amber{border-color:var(--amber);background:var(--amber-lt);color:var(--amber)}
+
+/* ── QUIZ COUNT SELECTOR ── */
+.qcount-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.qcount-btn{padding:10px 4px;border-radius:var(--r);font-size:14px;font-weight:700;cursor:pointer;border:1.5px solid var(--border);background:var(--card);color:var(--txt2);transition:.15s;font-family:var(--mono);min-height:44px;touch-action:manipulation;text-align:center}
+.qcount-btn.on{border-color:var(--blue-hl);background:var(--blue-hl);color:#fff}
+
+/* ── TAGS ── */
+.tag{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.03em;gap:4px}
+.tag-blue{background:var(--sky-lt);color:var(--blue-hl);border:1px solid var(--sky-bd)}
+.tag-amber{background:var(--amber-lt);color:var(--amber);border:1px solid var(--amber-bd)}
+.tag-slate{background:var(--slate-lt);color:var(--slate);border:1px solid var(--slate-md)}
+.tag-green{background:var(--green-lt);color:var(--green);border:1px solid var(--green-bd)}
+.tag-red{background:var(--red-lt);color:var(--red);border:1px solid var(--red-bd)}
+
+/* ── PROGRESS BAR ── */
+.prog-bar{background:var(--border2);border-radius:4px;height:5px;overflow:hidden;margin-bottom:6px}
+.prog-fill{height:100%;border-radius:4px;background:var(--blue-hl);transition:width .3s}
+
+/* ── QUESTION HEADER ── */
+.q-hdr{padding:14px 16px;background:var(--card);border-bottom:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.q-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.q-num{font-size:13px;font-weight:700;color:var(--txt2);font-family:var(--mono)}
+.q-actions{display:flex;align-items:center;gap:6px}
+
+/* ── TIMER ── */
+.timer-pill{display:flex;align-items:center;gap:5px;background:var(--slate-lt);border:1px solid var(--border);border-radius:20px;padding:4px 10px}
+.timer-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 1.2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.timer-txt{font-size:13px;font-weight:700;font-family:var(--mono)}
+
+/* ── QUESTION BOX ── */
+.q-wrap{padding:16px}
+.qbox{font-family:var(--mono);font-size:17px;line-height:2;color:var(--txt);background:var(--bg2);border:1px solid var(--border2);border-radius:var(--r2);padding:16px 18px;margin-bottom:14px;white-space:pre-wrap;word-break:break-word;overflow-x:auto;letter-spacing:.02em;-webkit-overflow-scrolling:touch}
+body.dark .qbox{background:var(--bg2)}
+
+/* ── OPTIONS ── */
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.opt{padding:14px 16px;border-radius:var(--r);text-align:left;font-size:15px;font-weight:500;font-family:var(--mono);cursor:pointer;border:1.5px solid var(--border);background:var(--card);color:var(--txt2);transition:.15s;width:100%;min-height:var(--touch);touch-action:manipulation;line-height:1.4;word-break:break-word;-webkit-user-select:none;user-select:none;display:flex;align-items:center;gap:8px}
+.opt:active{border-color:var(--blue-hl);background:var(--sky-lt)}
+.opt-ltr{font-size:11px;font-weight:800;color:var(--txt4);flex-shrink:0;width:16px}
+.opt.cor{background:var(--green-lt);border-color:var(--green);color:var(--green)}
+.opt.cor .opt-ltr{color:var(--green)}
+.opt.wrg{background:var(--red-lt);border-color:var(--red);color:var(--red)}
+.opt.wrg .opt-ltr{color:var(--red)}
+.opt.dim{color:var(--txt4);cursor:default;border-color:var(--border2)}
+.opt.dim .opt-ltr{color:var(--txt4)}
+
+/* ── SOLUTION ── */
+.sol{background:var(--green-lt);border:1px solid var(--green-bd);border-radius:var(--r2);padding:16px;margin:0 16px 14px;animation:fadeUp .25s ease}
+.sol-hdr{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.sol-title{font-size:12px;font-weight:800;color:var(--green);text-transform:uppercase;letter-spacing:.06em}
+.sol-step{font-size:13px;color:var(--txt2);padding:4px 0 4px 12px;border-left:2px solid var(--border);margin-bottom:4px;line-height:1.65;word-break:break-word}
+.sol-step.trick{border-left-color:var(--amber);color:var(--amber);font-weight:600}
+.sol-step.note{border-left-color:var(--blue-hl);color:var(--blue-hl)}
+.sol-ans{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--green-bd);border-radius:var(--r);padding:6px 14px;margin-top:10px;font-size:13px;color:var(--txt3)}
+.sol-ans-val{font-family:var(--mono);font-size:16px;font-weight:800;color:var(--green)}
+
+/* ── SERIES VISUAL ── */
+.series-chips{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px}
+.s-chip{padding:5px 10px;border-radius:6px;font-family:var(--mono);font-size:13px;font-weight:600;background:var(--bg2);border:1px solid var(--border);color:var(--txt2)}
+.s-chip.hi{background:var(--green-lt);border-color:var(--green);color:var(--green)}
+.s-chip.er{background:var(--red-lt);border-color:var(--red);color:var(--red)}
+.d-chip{padding:3px 8px;border-radius:5px;font-family:var(--mono);font-size:11px;font-weight:700;background:var(--sky-lt);border:1px solid var(--sky-bd);color:var(--blue-hl)}
+.chip-lbl{font-size:10px;font-weight:800;color:var(--txt4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+
+/* ── NEXT BTN AREA ── */
+.next-area{padding:0 16px 16px}
+
+/* ── Q ACTION BAR ── */
+.q-actbar{padding:10px 16px;background:var(--card);border-top:1px solid var(--border2);display:flex;gap:8px;align-items:center}
+.q-actbar-left{flex:1;display:flex;gap:6px}
+.act-btn{padding:7px 12px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--card);color:var(--txt3);font-family:var(--font);min-height:36px;touch-action:manipulation;transition:.15s;display:inline-flex;align-items:center;gap:5px}
+.act-btn:active{border-color:var(--blue-hl);color:var(--blue-hl)}
+.act-btn.on-mark{border-color:var(--amber);background:var(--amber-lt);color:var(--amber)}
+.act-btn.on-hard{border-color:var(--red);background:var(--red-lt);color:var(--red)}
+
+/* ── RESULTS SCREEN ── */
+.result-hero{background:var(--blue-dk);padding:28px 20px;text-align:center;color:#fff}
+.result-score-ring{width:120px;height:120px;border-radius:50%;border:6px solid rgba(255,255,255,.15);border-top-color:var(--amber-bd);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;flex-direction:column;animation:spin .8s ease-out}
+@keyframes spin{from{transform:rotate(-90deg)}to{transform:rotate(0deg)}}
+.result-pct{font-size:2.2rem;font-weight:800;font-family:var(--mono);color:var(--amber-bd);line-height:1}
+.result-pct-lbl{font-size:11px;color:rgba(255,255,255,.5);font-weight:600;margin-top:3px}
+.result-title{font-size:18px;font-weight:700;margin-bottom:4px}
+.result-sub{font-size:13px;color:rgba(255,255,255,.55);font-weight:500}
+.result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:16px;background:var(--bg)}
+.rstat{background:var(--card);border:1px solid var(--border2);border-radius:var(--r2);padding:14px 10px;text-align:center;box-shadow:var(--shadow)}
+.rstat-val{font-size:22px;font-weight:800;font-family:var(--mono);line-height:1;margin-bottom:4px}
+.rstat-lbl{font-size:10px;font-weight:700;color:var(--txt4);text-transform:uppercase;letter-spacing:.05em}
+
+/* ── RESULT QUESTION LIST ── */
+.rq-item{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:12px 14px;margin-bottom:8px;cursor:pointer;transition:.15s}
+.rq-item:active{background:var(--bg2)}
+.rq-item.wrong-q{border-left:3px solid var(--red)}
+.rq-item.right-q{border-left:3px solid var(--green)}
+.rq-item.tricky-q{border-left:3px solid var(--amber)}
+.rq-row{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.rq-num{font-size:11px;font-weight:800;color:var(--txt4);font-family:var(--mono);flex-shrink:0}
+.rq-type{font-size:11px;font-weight:700;color:var(--txt3);flex:1}
+.rq-time{font-size:11px;font-family:var(--mono);font-weight:600;color:var(--txt4)}
+.rq-q{font-size:12px;color:var(--txt2);font-family:var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+
+/* ── HARD ZONE / TRICKY QUESTIONS ── */
+.hz-empty{text-align:center;padding:40px 20px;color:var(--txt3)}
+.hz-empty-icon{font-size:2.5rem;margin-bottom:12px}
+.hz-empty-txt{font-size:14px;font-weight:500;line-height:1.6}
+.hz-nav{display:flex;justify-content:center;gap:10px;margin-top:16px;padding:0 16px 16px}
+
+/* ── REVISION REFS ── */
+.ref-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:5px}
+.ref-item{background:var(--bg2);border-radius:6px;padding:5px 8px;font-size:12px;font-family:var(--mono);color:var(--txt2);font-weight:500}
+.ref-item.bl{background:var(--sky-lt);border:1px solid var(--sky-bd);color:var(--blue-hl)}
+.pat-row{display:flex;gap:8px;padding:5px 0;border-bottom:1px solid var(--border2);align-items:baseline;flex-wrap:wrap}
+.pat-name{color:var(--blue-hl);min-width:140px;font-weight:700;font-size:12px}
+.pat-desc{color:var(--txt3);font-size:12px}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.fi{animation:fadeUp .22s ease}
+.sk{animation:shake .3s ease}
 
 /* ── DIVIDER ── */
-.div{height:1px;background:var(--navy-border);margin:14px 0}
+.div{height:1px;background:var(--border2);margin:12px 0}
 
-/* ── PRACTICE HEADER ── */
-.prac-hdr{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 14px;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.prac-left{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.prac-right{display:flex;align-items:center;gap:6px;flex-shrink:0}
-
-/* ── QCARD HEADER ── */
-.qcard-hdr{
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 14px;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.qcard-tags{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px}
-.qcard-actions{display:flex;align-items:center;gap:6px;flex-shrink:0}
-
-/* ── HARD ZONE ── */
-.hz-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
-.hz-title{font-size:17px;font-weight:700;color:var(--coral);display:flex;align-items:center;gap:8px}
-.hz-counter{font-size:13px;color:var(--txt-faint);font-weight:500;font-family:var(--mono)}
-
-/* ── REVISION ── */
-.rv-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-.rv-title{font-size:17px;font-weight:700;color:var(--txt)}
-.rv-card{
-  background:var(--navy-card);
-  border:1px solid var(--navy-border);
-  border-radius:var(--radius-lg);
-  padding:16px;
-  display:flex;justify-content:space-between;align-items:center;
-}
-.rv-card-gold{border-color:var(--gold-border);}
-.rv-card-red{border-color:rgba(255,107,107,.3);}
-.rv-label{font-weight:600;font-size:14px;margin-bottom:4px}
-.rv-count{font-size:13px;color:var(--txt-faint);font-weight:500}
-
-/* ── RESPONSIVE ── */
-@media(max-width:600px){
-  .hero-title{font-size:1.6rem}
-  .score-val{font-size:17px}
-  .qbox{font-size:15px;padding:13px 14px}
-  .opt{font-size:14px;padding:12px 13px}
-  .sol-step{font-size:12px}
-  .chip{font-size:12px;padding:4px 9px}
-  .score-grid{gap:6px}
-}
+/* ── MOBILE ── */
 @media(max-width:480px){
-  .opts-grid{grid-template-columns:1fr}
-  .score-grid{grid-template-columns:repeat(2,1fr)}
+  .opts{grid-template-columns:1fr}
+  .result-stats{grid-template-columns:repeat(3,1fr);gap:8px}
+  .rstat-val{font-size:18px}
+  .qbox{font-size:15px;line-height:1.9;padding:13px 14px}
+  .opt{font-size:14px;padding:12px 14px}
+  .mod-grid{gap:8px}
+  .qcount-grid{grid-template-columns:repeat(4,1fr)}
 }
 @media(max-width:360px){
-  #app{padding:10px}
-  .hero-title{font-size:1.4rem}
+  .mod-grid{grid-template-columns:1fr 1fr}
+  .result-stats{grid-template-columns:repeat(3,1fr)}
+  .qcount-grid{grid-template-columns:repeat(2,1fr)}
+  .brand-name{font-size:14px}
 }
+
+input[type=range]{width:100%;accent-color:var(--blue-hl);cursor:pointer;height:22px}
 </style>
 </head>
 <body>
 <div id="app">
 
-<!-- ═══════════════════ HOME ═══════════════════ -->
+<!-- ════════════════ HOME ════════════════ -->
 <div id="sc-home" class="sc on">
-
-  <div class="hero">
-    <div class="hero-icon">&#128208;</div>
-    <h1 class="hero-title">Quant<span>Master</span></h1>
-    <p class="hero-sub">IBPS &bull; SBI &bull; RBI &mdash; Prelims &amp; Mains</p>
+  <div class="topbar">
+    <div class="topbar-brand">
+      <div class="brand-icon">&#128208;</div>
+      <span class="brand-name">Quant<span>Master</span></span>
+    </div>
+    <div class="topbar-actions">
+      <button class="topbar-btn" onclick="goTo('hardzone')">&#9733; Tricky <span class="topbar-badge" id="hbadge" style="display:none">0</span></button>
+      <button class="topbar-btn" onclick="togDk()" id="dkb1">&#9788;</button>
+    </div>
   </div>
 
-  <div class="card" style="margin-bottom:12px">
-    <div class="sec-lbl">Module</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+  <div class="content">
+    <div style="background:var(--blue-dk);border-radius:var(--r2);padding:20px;margin-bottom:14px;color:#fff">
+      <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.5);margin-bottom:4px;letter-spacing:.04em;text-transform:uppercase">Bank Exam Preparation</div>
+      <div style="font-size:20px;font-weight:800;margin-bottom:6px;letter-spacing:-.01em">IBPS &bull; SBI &bull; RBI</div>
+      <div style="font-size:13px;color:rgba(255,255,255,.55);font-weight:500">Prelims &amp; Mains &mdash; Strictly exam-pattern questions</div>
+    </div>
+
+    <div class="sec">Select Module</div>
+    <div class="mod-grid">
       <button class="mod-card" id="mb-simplification" onclick="selMod('simplification')">
-        <div class="mod-icon">&#8721;</div>
-        <div class="mod-label">Simplification</div>
+        <span class="mc-icon">&#8721;</span>
+        <div class="mc-label">Simplification</div>
+        <div class="mc-desc">Fractions, BODMAS, Identities</div>
       </button>
       <button class="mod-card" id="mb-approximation" onclick="selMod('approximation')">
-        <div class="mod-icon">&#8776;</div>
-        <div class="mod-label">Approximation</div>
+        <span class="mc-icon">&#8776;</span>
+        <div class="mc-label">Approximation</div>
+        <div class="mc-desc">Rounding, Estimation</div>
       </button>
       <button class="mod-card" id="mb-missing" onclick="selMod('missing')">
-        <div class="mod-icon" style="font-size:20px;font-family:var(--mono);font-weight:700;color:var(--txt-muted)">?</div>
-        <div class="mod-label">Missing Number</div>
+        <span class="mc-icon" style="font-family:var(--mono);font-weight:800;color:var(--txt3);font-size:18px">?</span>
+        <div class="mc-label">Missing Number</div>
+        <div class="mc-desc">Find the missing term</div>
       </button>
       <button class="mod-card" id="mb-wrong" onclick="selMod('wrong')">
-        <div class="mod-icon">&#10007;</div>
-        <div class="mod-label">Wrong Number</div>
+        <span class="mc-icon">&#10007;</span>
+        <div class="mc-label">Wrong Number</div>
+        <div class="mc-desc">Find the incorrect term</div>
       </button>
     </div>
-  </div>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
-    <div class="card">
-      <div class="sec-lbl">Level</div>
-      <div style="display:flex;gap:6px">
-        <button class="sel-btn" id="lv-prelims" onclick="selLv('prelims')">Prelims</button>
-        <button class="sel-btn" id="lv-mains" onclick="selLv('mains')">Mains</button>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+      <div class="card" style="padding:14px">
+        <div class="sec">Exam Level</div>
+        <div class="sel-row">
+          <button class="sel-btn" id="lv-prelims" onclick="selLv('prelims')">Prelims</button>
+          <button class="sel-btn" id="lv-mains" onclick="selLv('mains')">Mains</button>
+        </div>
+      </div>
+      <div class="card" style="padding:14px">
+        <div class="sec">Mode</div>
+        <div class="sel-row">
+          <button class="sel-btn" id="md-practice" onclick="selMode('practice')">Practice</button>
+          <button class="sel-btn" id="md-timed" onclick="selMode('timed')">Timed</button>
+        </div>
       </div>
     </div>
-    <div class="card">
-      <div class="sec-lbl">Mode</div>
-      <div style="display:flex;gap:6px">
-        <button class="sel-btn" id="md-practice" onclick="selMode('practice')">Practice</button>
-        <button class="sel-btn" id="md-timed" onclick="selMode('timed')">Timed</button>
+
+    <div class="card" style="margin-bottom:12px;padding:14px">
+      <div class="sec">Number of Questions</div>
+      <div class="qcount-grid">
+        <button class="qcount-btn" onclick="selCount(10)">10</button>
+        <button class="qcount-btn" onclick="selCount(20)">20</button>
+        <button class="qcount-btn" onclick="selCount(30)">30</button>
+        <button class="qcount-btn" onclick="selCount(50)">50</button>
       </div>
     </div>
-  </div>
 
-  <div class="card" id="tset" style="margin-bottom:12px;display:none">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-      <span style="font-size:14px;font-weight:500;color:var(--txt-muted)">Time per Question</span>
-      <span id="tpqv" style="font-weight:700;color:var(--violet);font-family:var(--mono);font-size:15px">60s</span>
+    <div class="card" id="tset" style="margin-bottom:12px;padding:14px;display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <span style="font-size:14px;font-weight:600;color:var(--txt2)">Time per Question</span>
+        <span id="tpqv" style="font-weight:800;color:var(--blue-hl);font-family:var(--mono)">60s</span>
+      </div>
+      <input type="range" min="15" max="120" step="5" value="60" oninput="setTPQ(this.value)">
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--txt4);margin-top:4px;font-weight:700">
+        <span>15s HARD</span><span>60s NORMAL</span><span>120s EASY</span>
+      </div>
     </div>
-    <input type="range" min="15" max="120" step="5" value="60" oninput="setTPQ(this.value)">
-    <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--txt-faint);margin-top:6px;font-weight:600;letter-spacing:.03em">
-      <span>15s HARD</span><span>60s NORMAL</span><span>120s EASY</span>
+
+    <button class="btn btn-primary btn-full" style="font-size:16px;font-weight:800;padding:16px;letter-spacing:.01em" onclick="startQuiz()">
+      Start Practice &rarr;
+    </button>
+
+    <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <button class="btn btn-ghost btn-full" style="font-size:13px" onclick="goTo('revision')">&#128202; Reference</button>
+      <button class="btn btn-ghost btn-full" id="hbtn-home" style="font-size:13px" onclick="goTo('hardzone')">&#9733; Tricky Questions</button>
     </div>
   </div>
-
-  <div style="display:flex;gap:8px;margin-bottom:12px">
-    <button class="btn btn-p" style="flex:1;font-size:15px;font-weight:700;border-radius:12px;padding:14px" onclick="goTo('practice')">Start Practice &rarr;</button>
-    <button class="btn-icon" onclick="goTo('revision')" title="Revision">&#128202;</button>
-    <button class="btn-icon" id="hbh" onclick="goTo('hardzone')" title="Hard Zone" style="color:var(--coral);border-color:rgba(255,107,107,.3)">&#128293;</button>
-  </div>
-
-  <div style="display:flex;justify-content:flex-end">
-    <button class="btn btn-g" style="font-size:13px;padding:8px 14px;min-height:36px" onclick="togDk()" id="dkb1">&#9728; Light</button>
-  </div>
-
 </div>
 
-<!-- ═══════════════════ PRACTICE ═══════════════════ -->
+<!-- ════════════════ PRACTICE ════════════════ -->
 <div id="sc-practice" class="sc">
-
-  <div class="prac-hdr">
-    <div class="prac-left">
-      <button class="btn btn-g" style="padding:8px 12px;font-size:13px;min-height:38px" onclick="goTo('home')">&larr;</button>
-      <span style="font-weight:800;font-size:16px;letter-spacing:-.01em">Quant<span style="color:var(--teal)">Master</span></span>
-      <span class="tag tag-muted" id="p-lv" style="font-size:10px">PRELIMS</span>
-      <span class="tag tag-violet" id="p-md" style="display:none;font-size:10px">&#9203; TIMED</span>
+  <div class="topbar">
+    <div class="topbar-brand">
+      <button class="topbar-btn" onclick="confirmExit()" style="padding:6px 10px">&#8592; Exit</button>
     </div>
-    <div class="prac-right">
-      <button class="btn btn-g" style="font-size:12px;padding:7px 12px;min-height:36px" onclick="goTo('revision')">Revision</button>
-      <button class="btn btn-g" id="hbp" style="font-size:12px;padding:7px 12px;min-height:36px;color:var(--coral);border-color:rgba(255,107,107,.3)" onclick="goTo('hardzone')">&#128293; Hard</button>
-      <button class="btn-icon" style="width:36px;height:36px;font-size:16px" onclick="togDk()" id="dkb2">&#9728;</button>
+    <div style="display:flex;align-items:center;gap:6px">
+      <span class="tag" id="p-lv-tag" style="background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.15);font-size:10px">PRELIMS</span>
+      <span class="tag" id="p-md-tag" style="display:none;background:rgba(217,119,6,.2);color:var(--amber-bd);border-color:rgba(217,119,6,.3);font-size:10px">TIMED</span>
+    </div>
+    <div class="topbar-actions">
+      <button class="topbar-btn" onclick="togDk()" id="dkb2">&#9788;</button>
     </div>
   </div>
 
-  <div class="score-grid">
-    <div class="score-box"><div class="score-val" id="s-a" style="color:var(--gold)">0</div><div class="score-lbl">Attempted</div></div>
-    <div class="score-box"><div class="score-val" id="s-c" style="color:var(--teal)">0</div><div class="score-lbl">Correct</div></div>
-    <div class="score-box"><div class="score-val" id="s-p" style="color:var(--accent,#7c6cf0)">0%</div><div class="score-lbl">Accuracy</div></div>
-    <div class="score-box"><div class="score-val" id="s-s" style="color:var(--violet)">0s</div><div class="score-lbl">Avg Speed</div></div>
-  </div>
-
-  <div class="mod-tabs" id="mtabs"></div>
-
-  <div class="card" id="qcard">
-    <div class="qcard-hdr">
-      <div class="qcard-tags" id="qtags"></div>
-      <div class="qcard-actions">
-        <span id="twrap" style="display:none;align-items:center;gap:6px">
-          <span class="timer-track"><span class="timer-fill" id="tfill" style="width:100%;background:var(--teal)"></span></span>
-          <span class="timer-txt" id="ttxt" style="color:var(--teal)">60s</span>
-        </span>
-        <button class="btn btn-g" id="mkb" style="padding:7px 11px;font-size:12px;min-height:36px" onclick="togMk()">&#9734; Mark</button>
-        <button class="btn btn-g" id="hdb" style="padding:7px 11px;font-size:12px;min-height:36px;color:var(--coral);border-color:rgba(255,107,107,.3)" onclick="togHd()">&#128293;</button>
+  <div class="q-hdr">
+    <div class="q-meta">
+      <span class="q-num" id="q-num">Q 1/10</span>
+      <span class="tag tag-blue" id="p-type-tag" style="font-size:10px"></span>
+      <span class="tag tag-slate" id="p-topic-tag" style="font-size:10px"></span>
+    </div>
+    <div id="twrap" style="display:none">
+      <div class="timer-pill">
+        <div class="timer-dot" id="tdot"></div>
+        <span class="timer-txt" id="ttxt">60s</span>
       </div>
     </div>
+  </div>
+
+  <div style="padding:0 16px 4px">
+    <div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:10%"></div></div>
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--txt4);font-weight:600">
+      <span id="prog-lbl">Question 1 of 10</span>
+      <span id="prog-score">0 correct</span>
+    </div>
+  </div>
+
+  <div class="q-wrap">
+    <div id="p-pat-badge" style="margin-bottom:10px;display:none"></div>
     <div class="qbox" id="qtxt"></div>
-    <div class="opts-grid" id="ogrid"></div>
-    <div id="sarea"></div>
+    <div class="opts" id="ogrid"></div>
   </div>
 
-  <div style="margin-top:14px">
-    <button class="btn btn-p" style="width:100%;font-size:15px;font-weight:700;border-radius:12px;padding:15px" onclick="nextQ()">Next Question &rarr;</button>
+  <div id="sarea"></div>
+
+  <div class="next-area" id="next-area" style="display:none">
+    <button class="btn btn-primary btn-full" id="next-btn" onclick="nextQ()">Next Question &rarr;</button>
   </div>
 
+  <div class="q-actbar">
+    <div class="q-actbar-left">
+      <button class="act-btn" id="mkb" onclick="togMk()">&#9734; Mark</button>
+      <button class="act-btn" id="hdb" onclick="togHd()">&#9733; Tricky</button>
+    </div>
+    <div style="font-size:12px;color:var(--txt4);font-weight:600;font-family:var(--mono)" id="q-timer-lbl"></div>
+  </div>
 </div>
 
-<!-- ═══════════════════ HARD ZONE ═══════════════════ -->
+<!-- ════════════════ RESULTS ════════════════ -->
+<div id="sc-result" class="sc">
+  <div class="result-hero">
+    <div class="result-score-ring">
+      <div class="result-pct" id="r-pct">0%</div>
+      <div class="result-pct-lbl">Score</div>
+    </div>
+    <div class="result-title" id="r-title">Quiz Complete!</div>
+    <div class="result-sub" id="r-sub">Keep practising to improve</div>
+  </div>
+
+  <div class="result-stats">
+    <div class="rstat"><div class="rstat-val" id="r-correct" style="color:var(--green)">0</div><div class="rstat-lbl">Correct</div></div>
+    <div class="rstat"><div class="rstat-val" id="r-wrong" style="color:var(--red)">0</div><div class="rstat-lbl">Wrong</div></div>
+    <div class="rstat"><div class="rstat-val" id="r-time" style="color:var(--blue-hl)">0s</div><div class="rstat-lbl">Avg Time</div></div>
+  </div>
+
+  <div class="content">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
+      <button class="btn btn-primary btn-full" onclick="retakeQuiz()">Retake Quiz</button>
+      <button class="btn btn-ghost btn-full" onclick="goTo('home')">&#8592; Home</button>
+    </div>
+
+    <div class="sec">Question Analysis</div>
+    <div style="margin-bottom:10px;display:flex;gap:8px;flex-wrap:wrap">
+      <span class="tag tag-green">&#10003; Correct</span>
+      <span class="tag tag-red">&#10007; Wrong</span>
+      <span class="tag tag-amber">&#9733; Tricky (Saved)</span>
+    </div>
+    <div id="r-qlist"></div>
+  </div>
+</div>
+
+<!-- ════════════════ TRICKY / HARD ZONE ════════════════ -->
 <div id="sc-hardzone" class="sc">
-  <div class="hz-hdr">
-    <div>
-      <div class="hz-title">&#128293; Hard Zone</div>
-      <span class="hz-counter" id="hzctr"></span>
+  <div class="topbar">
+    <div class="topbar-brand">
+      <button class="topbar-btn" onclick="goTo('home')" style="padding:6px 10px">&#8592; Back</button>
+      <span style="color:#fff;font-weight:700;font-size:15px">&#9733; Tricky Questions</span>
     </div>
-    <button class="btn btn-g" style="padding:8px 14px;min-height:38px" onclick="goTo('practice')">&larr; Back</button>
+    <div class="topbar-actions">
+      <button class="topbar-btn" id="hz-clear-btn" onclick="clrHard()" style="color:#fca5a5">Clear All</button>
+    </div>
   </div>
+  <div id="hz-counter" style="padding:10px 16px 0;font-size:12px;font-weight:600;color:var(--txt3);font-family:var(--mono)"></div>
   <div id="hzcont"></div>
+  <div class="hz-nav" id="hz-nav"></div>
 </div>
 
-<!-- ═══════════════════ REVISION ═══════════════════ -->
+<!-- ════════════════ REVISION ════════════════ -->
 <div id="sc-revision" class="sc">
-  <div class="rv-hdr">
-    <div class="rv-title">Revision Dashboard</div>
-    <button class="btn btn-g" style="padding:8px 14px;min-height:38px" onclick="goTo('practice')">&larr; Back</button>
+  <div class="topbar">
+    <div class="topbar-brand">
+      <button class="topbar-btn" onclick="goTo('home')" style="padding:6px 10px">&#8592; Back</button>
+      <span style="color:#fff;font-weight:700;font-size:15px">&#128202; Quick Reference</span>
+    </div>
   </div>
-  <div style="display:grid;gap:12px">
-
-    <div class="rv-card rv-card-gold">
-      <div>
-        <div class="rv-label" style="color:var(--gold)">&#9733; Marked for Review</div>
-        <div class="rv-count" id="rv-m">0 questions</div>
-      </div>
-      <button class="btn btn-g" style="font-size:12px;padding:7px 12px;min-height:36px" onclick="clrM()">Clear</button>
-    </div>
-
-    <div class="rv-card rv-card-red">
-      <div>
-        <div class="rv-label" style="color:var(--coral)">&#128293; Hard Zone</div>
-        <div class="rv-count" id="rv-h">0 questions</div>
-      </div>
-      <button class="btn btn-g" style="font-size:12px;padding:7px 12px;min-height:36px" onclick="clrH()">Clear</button>
-    </div>
-
-    <div class="card">
-      <div class="sec-lbl" style="margin-bottom:14px">Simplification &amp; Approximation Types</div>
-      <div id="simpref"></div>
-    </div>
-
-    <div class="card">
-      <div class="sec-lbl" style="margin-bottom:10px">Fraction Family</div>
-      <div class="sec-lbl" style="color:var(--txt-faint);margin-bottom:7px;letter-spacing:.03em">BASE FRACTIONS 1/n</div>
+  <div class="content">
+    <div class="sec">Simplification &amp; Approximation Types</div>
+    <div id="simpref" class="card" style="padding:14px;margin-bottom:12px"></div>
+    <div class="sec">Fraction Family</div>
+    <div class="card" style="padding:14px;margin-bottom:12px">
+      <div class="sec" style="margin-bottom:6px">Base 1/n</div>
       <div class="ref-grid" id="fref"></div>
       <div class="div"></div>
-      <div class="sec-lbl" style="color:var(--txt-faint);margin-bottom:7px;letter-spacing:.03em">DERIVED FRACTIONS</div>
+      <div class="sec" style="margin-bottom:6px">Key Derived</div>
       <div class="ref-grid" id="dref"></div>
     </div>
-
-    <div class="card">
-      <div class="sec-lbl" style="margin-bottom:12px">Series Pattern Reference</div>
-      <div id="patref"></div>
-    </div>
-
+    <div class="sec">Series Patterns</div>
+    <div class="card" style="padding:14px" id="patref"></div>
   </div>
 </div>
 
 </div><!-- #app -->
-
 <script>
 
 // ============================================================
@@ -1425,268 +1195,638 @@ function genQ(){
 }
 
 // ============================================================
-// TIMER
+// APP STATE
 // ============================================================
-function startTmr(){clearInterval(G.tmr);G.tl=G.tpq;updTmr();G.tmr=setInterval(function(){G.tl--;updTmr();if(G.tl<=0){clearInterval(G.tmr);onTimeUp();}},1000);}
-function stopTmr(){clearInterval(G.tmr);}
-function updTmr(){var pct=G.tl/G.tpq;var col=pct>.5?'#4ca87c':pct>.25?'#c9a84c':'#c94c4c';var f=document.getElementById('tfill'),t=document.getElementById('ttxt');if(f){f.style.width=(pct*100)+'%';f.style.background=col;}if(t){t.textContent=G.tl+'s';t.style.color=col;}}
-function onTimeUp(){if(!G.answered){saveHard(G.q);revealAll();recStats(false,G.tpq);}}
+var G = {
+  mod: 'simplification', lv: 'prelims', mode: 'practice',
+  tpq: 60, dark: false,
+  totalQ: 10,
+  // Session
+  questions: [], qIdx: 0, answered: false, marked: false, hard: false,
+  tmr: null, tLeft: 60, qStartTime: 0,
+  stats: { correct: 0, wrong: 0, times: [] },
+  sessionLog: []  // [{q, correct, timeSpent, marked, hard, userAns}]
+};
+
+var hardQs = [];
+try { hardQs = JSON.parse(localStorage.getItem('qm_hard') || '[]'); } catch(e) {}
 
 // ============================================================
-// QUESTION DISPLAY
+// UTILS
 // ============================================================
-function loadQ(){
-  G.q=genQ();G.answered=false;G.marked=false;G.hard=false;
-  var tags=document.getElementById('qtags');
-  tags.innerHTML='';
-  tags.appendChild(mkEl('span',G.q.type,'tag tag-gold',''));
-  tags.appendChild(mkEl('span',G.q.topic,'tag tag-muted','font-size:10px;margin-left:5px'));
-  if(G.q.patternName){var br=document.createElement('br');tags.appendChild(br);tags.appendChild(mkEl('span','Pattern: '+G.q.patternName,'pat-badge',''));}
-  document.getElementById('qtxt').textContent=G.q.q;
-  document.getElementById('sarea').innerHTML='';
-  var mb=document.getElementById('mkb'),hb=document.getElementById('hdb');
-  mb.textContent='Mark';mb.style.color='';mb.style.borderColor='';
-  hb.textContent='Hard';hb.style.color='#c94c4c';
-  var grid=document.getElementById('ogrid');grid.innerHTML='';
-  G.q.opts.forEach(function(opt,i){
-    var btn=document.createElement('button');btn.className='opt';btn.setAttribute('data-opt',String(opt));
-    var lbl=mkEl('span',String.fromCharCode(65+i)+'.','opt-letter','');
-    btn.appendChild(lbl);btn.appendChild(document.createTextNode(String(opt)));
-    btn.onclick=(function(o,b){return function(){selAns(o,b);};})(opt,btn);
+function mkEl(tag, txt, cls, sty) {
+  var e = document.createElement(tag);
+  if (txt !== undefined && txt !== null) e.textContent = txt;
+  if (cls) e.className = cls;
+  if (sty) e.style.cssText = sty;
+  return e;
+}
+function saveHard() { localStorage.setItem('qm_hard', JSON.stringify(hardQs)); }
+function updHardBadge() {
+  var n = hardQs.length;
+  var b = document.getElementById('hbadge');
+  var hbh = document.getElementById('hbtn-home');
+  if (b) { b.style.display = n ? 'inline' : 'none'; b.textContent = n; }
+  if (hbh) hbh.textContent = '★ Tricky (' + n + ')';
+}
+
+// ============================================================
+// QUIZ FLOW
+// ============================================================
+function startQuiz() {
+  // Build question set
+  G.questions = [];
+  for (var i = 0; i < G.totalQ; i++) G.questions.push(genQ());
+  G.qIdx = 0;
+  G.answered = false;
+  G.stats = { correct: 0, wrong: 0, times: [] };
+  G.sessionLog = [];
+  goTo('practice');
+  loadQ();
+}
+
+function retakeQuiz() {
+  startQuiz();
+}
+
+function loadQ() {
+  G.answered = false; G.marked = false; G.hard = false;
+  clearInterval(G.tmr);
+  var q = G.questions[G.qIdx];
+  var total = G.questions.length;
+
+  // Progress
+  var pct = ((G.qIdx + 1) / total * 100).toFixed(0);
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-lbl').textContent = 'Question ' + (G.qIdx+1) + ' of ' + total;
+  document.getElementById('prog-score').textContent = G.stats.correct + ' correct';
+  document.getElementById('q-num').textContent = 'Q ' + (G.qIdx+1) + '/' + total;
+
+  // Tags
+  document.getElementById('p-type-tag').textContent = q.type;
+  document.getElementById('p-topic-tag').textContent = q.topic;
+
+  // Pattern badge for series
+  var pb = document.getElementById('p-pat-badge');
+  pb.innerHTML = '';
+  pb.style.display = 'none';
+  if (q.patternName) {
+    pb.style.display = 'block';
+    var badge = mkEl('span', 'Pattern: ' + q.patternName, 'tag tag-blue', 'font-size:11px');
+    pb.appendChild(badge);
+  }
+
+  // Question
+  document.getElementById('qtxt').textContent = q.q;
+  document.getElementById('sarea').innerHTML = '';
+  document.getElementById('next-area').style.display = 'none';
+
+  // Mark/hard reset
+  var mkb = document.getElementById('mkb');
+  var hdb = document.getElementById('hdb');
+  mkb.textContent = '☆ Mark'; mkb.className = 'act-btn';
+  hdb.textContent = '☆ Tricky'; hdb.className = 'act-btn';
+  document.getElementById('q-timer-lbl').textContent = '';
+
+  // Options
+  var grid = document.getElementById('ogrid');
+  grid.innerHTML = '';
+  q.opts.forEach(function(opt, i) {
+    var btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.setAttribute('data-opt', String(opt));
+    var ltr = mkEl('span', String.fromCharCode(65+i), 'opt-ltr', '');
+    btn.appendChild(ltr);
+    btn.appendChild(document.createTextNode(String(opt)));
+    btn.onclick = (function(o, b) { return function() { selAns(o, b); }; })(opt, btn);
     grid.appendChild(btn);
   });
-  var qc=document.getElementById('qcard');qc.className='card';void qc.offsetWidth;qc.className='card fi';
-  if(G.mode==='timed'){document.getElementById('twrap').style.display='flex';startTmr();}
-  else document.getElementById('twrap').style.display='none';
+
+  // Timer
+  G.qStartTime = Date.now();
+  if (G.mode === 'timed') {
+    document.getElementById('twrap').style.display = 'block';
+    G.tLeft = G.tpq;
+    updTimer();
+    G.tmr = setInterval(function() {
+      G.tLeft--;
+      updTimer();
+      if (G.tLeft <= 0) { clearInterval(G.tmr); onTimeUp(); }
+    }, 1000);
+  } else {
+    document.getElementById('twrap').style.display = 'none';
+  }
+
+  // Animate card
+  var qcard = document.getElementById('qtxt');
+  qcard.style.animation = 'none'; void qcard.offsetWidth;
+  qcard.style.animation = 'fadeUp .2s ease';
 }
 
-function selAns(opt,btn){
-  if(G.answered)return;G.answered=true;stopTmr();
-  var ts=G.tpq-G.tl,correct=String(opt)===String(G.q.ans);
-  recStats(correct,ts);
-  document.getElementById('ogrid').querySelectorAll('.opt').forEach(function(b){
-    var bo=b.getAttribute('data-opt');
-    if(String(bo)===String(G.q.ans))b.className='opt cor';
-    else if(b===btn&&!correct)b.className='opt wrg';
-    else b.className='opt dim';
-    b.onclick=null;
+function updTimer() {
+  var pct = G.tLeft / G.tpq;
+  var col = pct > 0.5 ? 'var(--green)' : pct > 0.25 ? 'var(--amber)' : 'var(--red)';
+  var txt = document.getElementById('ttxt');
+  var dot = document.getElementById('tdot');
+  if (txt) { txt.textContent = G.tLeft + 's'; txt.style.color = col; }
+  if (dot) dot.style.background = col;
+}
+
+function onTimeUp() {
+  if (!G.answered) {
+    addToHard(G.questions[G.qIdx]);
+    revealAll(null);
+    var ts = G.tpq;
+    G.stats.wrong++;
+    G.stats.times.push(ts);
+    logQ(null, ts, false);
+    showNextBtn();
+  }
+}
+
+function selAns(opt, btn) {
+  if (G.answered) return;
+  G.answered = true;
+  clearInterval(G.tmr);
+  var ts = Math.round((Date.now() - G.qStartTime) / 1000);
+  document.getElementById('q-timer-lbl').textContent = ts + 's';
+  var q = G.questions[G.qIdx];
+  var correct = String(opt) === String(q.ans);
+  if (correct) G.stats.correct++; else { G.stats.wrong++; addToHard(q); }
+  G.stats.times.push(ts);
+  logQ(opt, ts, correct);
+
+  // Style options
+  document.getElementById('ogrid').querySelectorAll('.opt').forEach(function(b) {
+    var bo = b.getAttribute('data-opt');
+    if (String(bo) === String(q.ans)) b.className = 'opt cor';
+    else if (b === btn && !correct) b.className = 'opt wrg';
+    else b.className = 'opt dim';
+    b.onclick = null;
   });
-  if(!correct){var qc=document.getElementById('qcard');qc.classList.add('sk');setTimeout(function(){qc.classList.remove('sk');},350);saveHard(G.q);}
-  showSol();
+
+  if (!correct) {
+    var qw = document.getElementById('qtxt');
+    qw.style.animation = 'shake .3s ease';
+    setTimeout(function() { qw.style.animation = ''; }, 350);
+  }
+
+  showSol(q);
+  showNextBtn();
+  document.getElementById('prog-score').textContent = G.stats.correct + ' correct';
 }
 
-function revealAll(){
-  G.answered=true;
-  document.getElementById('ogrid').querySelectorAll('.opt').forEach(function(b){
-    var bo=b.getAttribute('data-opt');
-    if(String(bo)===String(G.q.ans))b.className='opt cor';else b.className='opt dim';b.onclick=null;
-  });showSol();
+function revealAll(skip) {
+  G.answered = true;
+  var q = G.questions[G.qIdx];
+  document.getElementById('ogrid').querySelectorAll('.opt').forEach(function(b) {
+    var bo = b.getAttribute('data-opt');
+    if (String(bo) === String(q.ans)) b.className = 'opt cor';
+    else b.className = 'opt dim';
+    b.onclick = null;
+  });
+  showSol(q);
 }
 
-function showSol(){
-  var area=document.getElementById('sarea');
-  var wrap=document.createElement('div');wrap.className='sol-wrap';
-  wrap.appendChild(mkEl('div','&#128209; Step-by-Step Solution','sol-title',''));
+function logQ(userAns, ts, correct) {
+  G.sessionLog.push({
+    q: G.questions[G.qIdx],
+    qIdx: G.qIdx,
+    correct: correct,
+    timeSpent: ts,
+    marked: G.marked,
+    hard: G.hard,
+    userAns: userAns
+  });
+}
 
-  // Series: show visual series + diffs
-  if(G.q.type==='Missing Number'||G.q.type==='Wrong Number'){
-    var fs=G.q.fullSeries||[];
-    if(fs.length){
-      var row=document.createElement('div');row.className='chips-row';
-      fs.forEach(function(v,i){
-        var isKey=(G.q.type==='Wrong Number'&&i===G.q.wrongIdx)||(G.q.type==='Missing Number'&&i===G.q.hideIdx);
-        row.appendChild(mkEl('div',String(v),'chip'+(isKey?' hi':''),''));
+function showNextBtn() {
+  var nextArea = document.getElementById('next-area');
+  var nextBtn = document.getElementById('next-btn');
+  nextArea.style.display = 'block';
+  var isLast = G.qIdx >= G.questions.length - 1;
+  nextBtn.textContent = isLast ? 'See Results →' : 'Next Question →';
+}
+
+function nextQ() {
+  if (G.qIdx >= G.questions.length - 1) {
+    showResults();
+  } else {
+    G.qIdx++;
+    loadQ();
+  }
+}
+
+// ============================================================
+// SOLUTION DISPLAY
+// ============================================================
+function showSol(q) {
+  var area = document.getElementById('sarea');
+  var wrap = document.createElement('div');
+  wrap.className = 'sol';
+
+  var hdr = document.createElement('div');
+  hdr.className = 'sol-hdr';
+  var icon = mkEl('span', '✔ ', '', 'color:var(--green);font-weight:900');
+  var title = mkEl('span', 'Step-by-Step Solution', 'sol-title', '');
+  hdr.appendChild(icon); hdr.appendChild(title);
+  wrap.appendChild(hdr);
+
+  // Series visual
+  if (q.type === 'Missing Number' || q.type === 'Wrong Number') {
+    var fs = q.fullSeries || [];
+    if (fs.length) {
+      wrap.appendChild(mkEl('div', 'Correct Series', 'chip-lbl', ''));
+      var row = document.createElement('div'); row.className = 'series-chips';
+      fs.forEach(function(v, i) {
+        var isKey = (q.type === 'Wrong Number' && i === q.wrongIdx) || (q.type === 'Missing Number' && i === q.hideIdx);
+        row.appendChild(mkEl('div', String(v), 's-chip' + (isKey ? ' hi' : ''), ''));
       });
-      wrap.appendChild(mkEl('div','Correct Series','chips-lbl',''));
       wrap.appendChild(row);
-      // Diffs row
-      var drow=document.createElement('div');drow.className='chips-row';
-      for(var di=1;di<fs.length;di++){var d=r2(fs[di]-fs[di-1]);drow.appendChild(mkEl('div',(d>=0?'+':'')+d,'dchip',''));}
-      wrap.appendChild(mkEl('div','Differences','chips-lbl',''));
+      wrap.appendChild(mkEl('div', 'Differences', 'chip-lbl', ''));
+      var drow = document.createElement('div'); drow.className = 'series-chips';
+      for (var di = 1; di < fs.length; di++) {
+        var d = r2(fs[di] - fs[di-1]);
+        drow.appendChild(mkEl('div', (d >= 0 ? '+' : '') + d, 'd-chip', ''));
+      }
       wrap.appendChild(drow);
     }
   }
 
-  G.q.solution.forEach(function(s){
-    if(!s)return;
-    var isTk=s.indexOf('Trick:')=== 0||s.indexOf('IBPS')=== 0;
-    var isHl=s.indexOf('Identity:')=== 0||s.indexOf('Note:')=== 0;
-    wrap.appendChild(mkEl('div',s,'sol-step'+(isTk?' tk':isHl?' hl':''),''));
+  // Steps
+  q.solution.forEach(function(s) {
+    if (!s) return;
+    var isTk = s.indexOf('Trick:') === 0 || s.indexOf('IBPS') === 0;
+    var isNote = s.indexOf('Note:') === 0 || s.indexOf('Identity:') === 0;
+    wrap.appendChild(mkEl('div', s, 'sol-step' + (isTk ? ' trick' : isNote ? ' note' : ''), ''));
   });
-  var ft=mkEl('div','','','margin-top:10px;padding-top:10px;border-top:1px solid var(--navy-border);font-size:13px;color:var(--txt-faint)');
-  ft.textContent='Answer: ';ft.appendChild(mkEl('span',String(G.q.ans),'','color:var(--teal);font-weight:700;font-family:var(--mono)'));
-  wrap.appendChild(ft);area.innerHTML='';area.appendChild(wrap);
+
+  // Answer pill
+  var ansRow = document.createElement('div');
+  ansRow.className = 'sol-ans';
+  ansRow.appendChild(mkEl('span', 'Correct Answer:', '', 'font-size:12px;font-weight:600'));
+  ansRow.appendChild(mkEl('span', String(q.ans), 'sol-ans-val', ''));
+  wrap.appendChild(ansRow);
+
+  area.innerHTML = '';
+  area.appendChild(wrap);
 }
 
-function recStats(correct,speed){
-  G.stats.a++;if(correct)G.stats.c++;G.stats.spds.push(speed||G.tpq);
-  var acc=Math.round(G.stats.c/G.stats.a*100);
-  var avg=Math.round(G.stats.spds.reduce(function(a,b){return a+b;},0)/G.stats.spds.length);
-  document.getElementById('s-a').textContent=G.stats.a;
-  document.getElementById('s-c').textContent=G.stats.c;
-  document.getElementById('s-p').textContent=acc+'%';
-  document.getElementById('s-s').textContent=avg+'s';
+// ============================================================
+// RESULTS SCREEN
+// ============================================================
+function showResults() {
+  clearInterval(G.tmr);
+  var total = G.questions.length;
+  var cor = G.stats.correct;
+  var wrg = G.stats.wrong + (total - G.sessionLog.length); // unanswered = wrong
+  var pct = Math.round(cor / total * 100);
+  var avgTime = G.stats.times.length
+    ? Math.round(G.stats.times.reduce(function(a,b){return a+b;},0) / G.stats.times.length)
+    : 0;
+
+  document.getElementById('r-pct').textContent = pct + '%';
+  document.getElementById('r-correct').textContent = cor;
+  document.getElementById('r-wrong').textContent = total - cor;
+  document.getElementById('r-time').textContent = avgTime + 's';
+
+  // Title
+  var title = pct >= 80 ? 'Excellent Performance!' : pct >= 60 ? 'Good Attempt!' : pct >= 40 ? 'Needs Improvement' : 'Keep Practising!';
+  var sub = pct >= 80 ? 'You are exam-ready for this topic' : pct >= 60 ? 'Review the wrong answers below' : 'Focus on the solution steps carefully';
+  document.getElementById('r-title').textContent = title;
+  document.getElementById('r-sub').textContent = 'Accuracy: ' + pct + '% | ' + cor + '/' + total + ' correct';
+
+  // Q list
+  var list = document.getElementById('r-qlist');
+  list.innerHTML = '';
+  G.sessionLog.forEach(function(log, i) {
+    var q = log.q;
+    var item = document.createElement('div');
+    var cls = 'rq-item ' + (log.hard ? 'tricky-q' : log.correct ? 'right-q' : 'wrong-q');
+    item.className = cls;
+    // Row 1
+    var row = document.createElement('div'); row.className = 'rq-row';
+    row.appendChild(mkEl('span', 'Q' + (i+1), 'rq-num', ''));
+    row.appendChild(mkEl('span', q.type + ' • ' + q.topic, 'rq-type', ''));
+    if (log.hard) row.appendChild(mkEl('span', '★ Saved', 'tag tag-amber', 'font-size:10px'));
+    else if (log.correct) row.appendChild(mkEl('span', '✔ Correct', 'tag tag-green', 'font-size:10px'));
+    else row.appendChild(mkEl('span', '✘ Wrong', 'tag tag-red', 'font-size:10px'));
+    row.appendChild(mkEl('span', log.timeSpent + 's', 'rq-time', ''));
+    item.appendChild(row);
+    // Q preview
+    var qprev = mkEl('div', q.q.replace(/\n/g,' '), 'rq-q', '');
+    item.appendChild(qprev);
+    // Expand on click
+    item.onclick = (function(lg) {
+      return function() {
+        var existing = this.querySelector('.sol');
+        if (existing) { existing.remove(); return; }
+        var sol = buildSolEl(lg.q);
+        sol.style.marginTop = '10px';
+        this.appendChild(sol);
+      };
+    })(log);
+    list.appendChild(item);
+  });
+
+  goTo('result');
 }
-function nextQ(){loadQ();}
+
+function buildSolEl(q) {
+  var wrap = document.createElement('div');
+  wrap.className = 'sol';
+  wrap.style.margin = '0';
+  var title = mkEl('div', '✔ Solution', 'sol-title', 'margin-bottom:10px');
+  wrap.appendChild(title);
+  q.solution.forEach(function(s) {
+    if (!s) return;
+    var isTk = s.indexOf('Trick:') === 0;
+    wrap.appendChild(mkEl('div', s, 'sol-step' + (isTk ? ' trick' : ''), ''));
+  });
+  var ansRow = document.createElement('div');
+  ansRow.className = 'sol-ans';
+  ansRow.appendChild(mkEl('span', 'Answer:', '', 'font-size:12px;font-weight:600'));
+  ansRow.appendChild(mkEl('span', String(q.ans), 'sol-ans-val', ''));
+  wrap.appendChild(ansRow);
+  return wrap;
+}
 
 // ============================================================
-// MARK / HARD
+// MARK / HARD / TRICKY
 // ============================================================
-function togMk(){
-  if(!G.q)return;G.marked=!G.marked;var btn=document.getElementById('mkb');
-  btn.textContent=G.marked?'&#9733; Marked':'&#9734; Mark';btn.style.color=G.marked?'var(--gold)':'';btn.style.borderColor=G.marked?'var(--gold-border)':'';
-  if(G.marked){if(!MQ.find(function(q){return q.q===G.q.q;}))MQ.push(G.q);}
-  else MQ=MQ.filter(function(q){return q.q!==G.q.q;});
-  localStorage.setItem('ibps_mq',JSON.stringify(MQ));
+function addToHard(q) {
+  if (!q) return;
+  if (!hardQs.find(function(hq) { return hq.q === q.q; })) {
+    hardQs.push(q);
+    saveHard();
+    updHardBadge();
+  }
 }
-function togHd(){
-  if(!G.q)return;G.hard=!G.hard;var btn=document.getElementById('hdb');
-  if(G.hard){btn.textContent='Saved!';saveHard(G.q);}
-  else{btn.textContent='Hard';HQ=HQ.filter(function(q){return q.q!==G.q.q;});localStorage.setItem('ibps_hq',JSON.stringify(HQ));}
-  updHB();
+
+function togMk() {
+  G.marked = !G.marked;
+  var btn = document.getElementById('mkb');
+  btn.textContent = G.marked ? '★ Marked' : '☆ Mark';
+  btn.className = G.marked ? 'act-btn on-mark' : 'act-btn';
 }
-function saveHard(q){if(!q)return;if(!HQ.find(function(hq){return hq.q===q.q;})){HQ.push(q);localStorage.setItem('ibps_hq',JSON.stringify(HQ));updHB();}}
-function updHB(){var n=HQ.length;var b1=document.getElementById('hbh'),b2=document.getElementById('hbp');if(b1)b1.innerHTML=n?'&#128293; '+n:'&#128293;';if(b2)b2.textContent=n?'Hard Zone ('+n+')':'Hard Zone';}
-function clrM(){MQ=[];localStorage.removeItem('ibps_mq');renderRev();}
-function clrH(){HQ=[];localStorage.removeItem('ibps_hq');updHB();renderRev();}
+
+function togHd() {
+  G.hard = !G.hard;
+  var btn = document.getElementById('hdb');
+  btn.textContent = G.hard ? '★ Saved' : '☆ Tricky';
+  btn.className = G.hard ? 'act-btn on-hard' : 'act-btn';
+  if (G.hard) {
+    addToHard(G.questions[G.qIdx]);
+    // Update current log entry if exists
+    var log = G.sessionLog[G.sessionLog.length - 1];
+    if (log && log.qIdx === G.qIdx) log.hard = true;
+  } else {
+    var q = G.questions[G.qIdx];
+    hardQs = hardQs.filter(function(hq) { return hq.q !== q.q; });
+    saveHard(); updHardBadge();
+  }
+}
+
+function clrHard() {
+  if (!hardQs.length) return;
+  if (!confirm('Clear all ' + hardQs.length + ' tricky questions?')) return;
+  hardQs = []; saveHard(); updHardBadge(); renderHZ();
+}
 
 // ============================================================
-// HARD ZONE
+// HARD ZONE (TRICKY QUESTIONS)
 // ============================================================
-var hzI=0;
-function renderHZ(){
-  var con=document.getElementById('hzcont'),ctr=document.getElementById('hzctr');
-  if(!HQ.length){ctr.textContent='';con.innerHTML='<div style="text-align:center;padding:40px 16px;color:var(--txt-muted)"><div style="font-size:2.8rem;margin-bottom:14px">&#127881;</div><div style="margin-bottom:22px;line-height:1.7;font-size:15px">Hard Zone is empty!<br><span style="color:var(--txt-faint);font-size:13px">Click &#128293; Hard on any question to save it.</span></div><button class="btn btn-p" style="min-width:200px;padding:13px;font-size:15px" onclick="goTo(\'practice\')">Back to Practice</button></div>';return;}
-  ctr.textContent=(hzI+1)+' / '+HQ.length;
-  var q=HQ[hzI];con.innerHTML='';
-  var card=document.createElement('div');card.className='card fi';
-  var tr=document.createElement('div');tr.style.cssText='display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap';
-  tr.appendChild(mkEl('span',q.type,'tag tag-gold',''));
-  tr.appendChild(mkEl('span',q.topic,'tag tag-muted','font-size:10px'));
-  if(q.patternName)tr.appendChild(mkEl('span','Pattern: '+q.patternName,'pat-badge',''));
-  card.appendChild(tr);card.appendChild(mkEl('div',q.q,'qb',''));
-  var og=document.createElement('div');og.className='og';
-  var sb=document.createElement('div');
-  q.opts.forEach(function(opt,i){
-    var btn=document.createElement('button');btn.className='opt';btn.setAttribute('data-opt',String(opt));
-    var lbl=mkEl('span',String.fromCharCode(65+i)+'.','opt-letter','');
-    btn.appendChild(lbl);btn.appendChild(document.createTextNode(String(opt)));
-    btn.onclick=(function(o,b){return function(){
-      var ok=String(o)===String(q.ans);
-      og.querySelectorAll('.opt').forEach(function(bb){var bo=bb.getAttribute('data-opt');if(String(bo)===String(q.ans))bb.className='opt cor';else if(bb===b&&!ok)bb.className='opt wrg';else bb.className='opt dim';bb.onclick=null;});
-      var w=document.createElement('div');w.className='sol-wrap';
-      w.appendChild(mkEl('div','&#128209; Solution','sol-title',''));
-      if(q.type==='Missing Number'||q.type==='Wrong Number'){
-        var fs=q.fullSeries||[];
-        if(fs.length){var row=document.createElement('div');row.className='chips-row';fs.forEach(function(v,vi){var isKey=(q.type==='Wrong Number'&&vi===q.wrongIdx)||(q.type==='Missing Number'&&vi===q.hideIdx);row.appendChild(mkEl('div',String(v),'chip'+(isKey?' hi':''),''));});w.appendChild(row);}
-      }
-      q.solution.forEach(function(s){if(!s)return;var isTk=s.indexOf('Trick:')===0;w.appendChild(mkEl('div',s,'sol-step'+(isTk?' tk':''),''));});
-      var ft=document.createElement('div');ft.className='sol-ans';ft.appendChild(mkEl('span','Answer:','',''));var av=mkEl('span',String(q.ans),'sol-ans-val','');ft.appendChild(av);w.appendChild(ft);
-      sb.innerHTML='';sb.appendChild(w);
-    };})(opt,btn);
+var hzI = 0;
+
+function renderHZ() {
+  var con = document.getElementById('hzcont');
+  var ctr = document.getElementById('hz-counter');
+  var nav = document.getElementById('hz-nav');
+  nav.innerHTML = '';
+  if (!hardQs.length) {
+    ctr.textContent = '';
+    con.innerHTML = '<div class="hz-empty"><div class="hz-empty-icon">☆</div><div class="hz-empty-txt">No tricky questions saved yet.<br><span style="color:var(--txt4);font-size:12px">Click ☆ Tricky during practice to save questions here.</span></div></div>';
+    return;
+  }
+  if (hzI >= hardQs.length) hzI = 0;
+  ctr.textContent = (hzI+1) + ' of ' + hardQs.length + ' tricky questions';
+  var q = hardQs[hzI];
+
+  con.innerHTML = '';
+  var wrap = document.createElement('div');
+  wrap.style.cssText = 'padding:16px';
+
+  // Tags
+  var tagRow = document.createElement('div');
+  tagRow.style.cssText = 'display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px';
+  tagRow.appendChild(mkEl('span', q.type, 'tag tag-blue', 'font-size:10px'));
+  tagRow.appendChild(mkEl('span', q.topic, 'tag tag-slate', 'font-size:10px'));
+  if (q.patternName) tagRow.appendChild(mkEl('span', 'Pattern: '+q.patternName, 'tag tag-amber', 'font-size:10px'));
+  wrap.appendChild(tagRow);
+
+  // Q
+  wrap.appendChild(mkEl('div', q.q, 'qbox', ''));
+
+  // Options
+  var og = document.createElement('div'); og.className = 'opts';
+  var solBox = document.createElement('div');
+
+  q.opts.forEach(function(opt, i) {
+    var btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.setAttribute('data-opt', String(opt));
+    var ltr = mkEl('span', String.fromCharCode(65+i), 'opt-ltr', '');
+    btn.appendChild(ltr);
+    btn.appendChild(document.createTextNode(String(opt)));
+    btn.onclick = (function(o, b) {
+      return function() {
+        var correct = String(o) === String(q.ans);
+        og.querySelectorAll('.opt').forEach(function(bb) {
+          var bo = bb.getAttribute('data-opt');
+          if (String(bo) === String(q.ans)) bb.className = 'opt cor';
+          else if (bb === b && !correct) bb.className = 'opt wrg';
+          else bb.className = 'opt dim';
+          bb.onclick = null;
+        });
+        var sol = buildSolEl(q);
+        sol.style.marginTop = '12px';
+        solBox.innerHTML = ''; solBox.appendChild(sol);
+      };
+    })(opt, btn);
     og.appendChild(btn);
   });
-  card.appendChild(og);card.appendChild(sb);con.appendChild(card);
-  var nav=document.createElement('div');nav.style.cssText='display:flex;justify-content:center;gap:10px;margin-top:18px;flex-wrap:wrap';
-  if(hzI>0){var pv=mkEl('button','&larr; Prev','btn btn-g','min-height:44px;padding:10px 22px');pv.onclick=function(){hzI--;renderHZ();};nav.appendChild(pv);}
-  if(hzI<HQ.length-1){var nx=mkEl('button','Next &rarr;','btn btn-p','min-height:44px;padding:10px 22px;flex:1;max-width:220px');nx.onclick=function(){hzI++;renderHZ();};nav.appendChild(nx);}
-  con.appendChild(nav);
+
+  wrap.appendChild(og);
+  wrap.appendChild(solBox);
+  con.appendChild(wrap);
+
+  // Nav
+  if (hzI > 0) {
+    var pv = mkEl('button', '← Prev', 'btn btn-ghost', 'min-width:100px');
+    pv.onclick = function() { hzI--; renderHZ(); };
+    nav.appendChild(pv);
+  }
+  var rmBtn = mkEl('button', 'Remove', 'btn btn-ghost', 'min-width:90px;color:var(--red);border-color:var(--red-bd)');
+  rmBtn.onclick = (function(qq) {
+    return function() {
+      hardQs = hardQs.filter(function(h) { return h.q !== qq.q; });
+      saveHard(); updHardBadge();
+      if (hzI >= hardQs.length && hzI > 0) hzI--;
+      renderHZ();
+    };
+  })(q);
+  nav.appendChild(rmBtn);
+  if (hzI < hardQs.length - 1) {
+    var nx = mkEl('button', 'Next →', 'btn btn-primary', 'min-width:100px');
+    nx.onclick = function() { hzI++; renderHZ(); };
+    nav.appendChild(nx);
+  }
 }
 
 // ============================================================
-// REVISION
+// REVISION REFERENCE
 // ============================================================
-function renderRev(){
-  document.getElementById('rv-m').textContent=MQ.length+' question'+(MQ.length!==1?'s':'');
-  document.getElementById('rv-h').textContent=HQ.length+' question'+(HQ.length!==1?'s':'');
-
-  var sr=document.getElementById('simpref');sr.innerHTML='';
-  var simpTypes=[
-    ['Type 1','n1/d1 of A + n2/d2 of B = ?','Fraction of exact-divisible bases (most common)'],
-    ['Type 2','n1/d1 of A - n2/d2 of B = ?','Subtraction variant of Type 1'],
-    ['Type 3','A² + BxC - D² = ?','BODMAS with squares - Orders first'],
-    ['Type 4','A/B + C³ - √(D) = ?','Division + Cube³ + √'],
-    ['Type 5','√(AxB) + C² - D = ?','Factor under sqrt to simplify'],
-    ['Type 6','n/d of A + B² - √(C) = ?','Fraction + Power + √ combined'],
-    ['Type 7','(A+B)² - (A-B)² = ?','Identity = 4AB. Never expand manually!'],
-    ['Type 8','(A+B)² + (A-B)² = ?','Identity = 2(A²+B²). Use formula!'],
-    ['Type 9','A% of B + B% of A = ?','Always = 2AB/100. Symmetric property!'],
-    ['Type 10','3 parts: fraction + fraction + square','Mains level - solve each part separately'],
+function renderRevision() {
+  var sr = document.getElementById('simpref');
+  sr.innerHTML = '';
+  var simpTypes = [
+    ['T1', 'n₁/d₁ of A + n₂/d₂ of B', 'Fraction of exact-divisible bases'],
+    ['T2', 'A² + B×C − D²', 'BODMAS with squares'],
+    ['T3', 'A/B + C³ − √(D)', 'Division + Cube + Sqrt'],
+    ['T4', '√(A×B) + C² − D', 'Factor under √'],
+    ['T5', '(A+B)² − (A-B)²', 'Identity = 4AB'],
+    ['T6', '(A+B)² + (A-B)²', 'Identity = 2(A²+B²)'],
+    ['T7', 'A% of B + B% of A', '= 2AB/100 always'],
+    ['T8', 'A³ + B² − C×D', 'Mains: cube+sq+product'],
   ];
-  var approxTypes=[
-    ['√(X.YZ) ~','Round to nearest perfect square (n²). Memorise 1² to 50².'],
-    ['(X.YZ)² ~','Round X.YZ to nearest integer, then square.'],
-    ['P% of X.YZ ~','Round X.YZ to nearest multiple of denominator.'],
-    ['X.YZ / P.QR ~','Round both to integers, then divide.'],
-    ['X.YZ x P.QR ~','Round both to integers, then multiply.'],
-    ['A% of X + B% of Y ~','Round each base separately, then compute each %.'],
+  var approxTypes = [
+    ['√(X.YZ)', 'Round to nearest perfect square'],
+    ['(X.YZ)²', 'Round to nearest integer, then square'],
+    ['P% of X.YZ', 'Round to nearest multiple of denominator'],
+    ['X.YZ ÷ P.QR', 'Round both, then divide'],
+    ['X.YZ × P.QR', 'Round both, then multiply'],
+    ['A% of X + B% of Y', 'Round each base separately'],
   ];
-
-  var sh=mkEl('div','Simplification Types','sec-lbl','margin-bottom:10px;font-size:11px');
-  sr.appendChild(sh);
-  simpTypes.forEach(function(row){
-    var el=document.createElement('div');el.style.cssText='display:grid;grid-template-columns:52px 1fr 1.2fr;gap:6px;font-size:12px;padding:6px 0;border-bottom:1px solid var(--navy-border)';
-    el.appendChild(mkEl('span',row[0],'','color:var(--violet);font-weight:700;font-size:11px'));
-    el.appendChild(mkEl('span',row[1],'','color:var(--gold);font-family:var(--mono);font-size:12px'));
-    // skip third col on mobile
-    el.appendChild(mkEl('span',row[2],'','color:var(--txt-faint);font-size:11px'));
+  var sh = mkEl('div', 'Simplification', 'sec', 'margin-bottom:8px'); sr.appendChild(sh);
+  simpTypes.forEach(function(row) {
+    var el = document.createElement('div');
+    el.style.cssText = 'display:grid;grid-template-columns:36px 1fr 1.2fr;gap:6px;font-size:12px;padding:5px 0;border-bottom:1px solid var(--border2);align-items:baseline';
+    el.appendChild(mkEl('span', row[0], '', 'color:var(--blue-hl);font-weight:800;font-size:11px'));
+    el.appendChild(mkEl('span', row[1], '', 'color:var(--amber);font-family:var(--mono);font-size:12px'));
+    el.appendChild(mkEl('span', row[2], '', 'color:var(--txt3);font-size:11px'));
     sr.appendChild(el);
   });
-  var ah=mkEl('div','Approximation Types','sec-lbl','margin:14px 0 10px;font-size:11px');
-  sr.appendChild(ah);
-  approxTypes.forEach(function(row){
-    var el=document.createElement('div');el.style.cssText='display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:start;font-size:12px;padding:6px 0;border-bottom:1px solid var(--navy-border)';
-    el.appendChild(mkEl('span',row[0],'','color:var(--gold);font-family:var(--mono);font-size:12px;font-weight:600'));
-    el.appendChild(mkEl('span',row[1],'','color:var(--txt-faint);font-size:12px'));
+  var ah = mkEl('div', 'Approximation', 'sec', 'margin:12px 0 8px'); sr.appendChild(ah);
+  approxTypes.forEach(function(row) {
+    var el = document.createElement('div');
+    el.style.cssText = 'display:grid;grid-template-columns:140px 1fr;gap:6px;font-size:12px;padding:5px 0;border-bottom:1px solid var(--border2);align-items:baseline';
+    el.appendChild(mkEl('span', row[0], '', 'color:var(--amber);font-family:var(--mono);font-size:12px;font-weight:600'));
+    el.appendChild(mkEl('span', row[1], '', 'color:var(--txt3);font-size:11px'));
     sr.appendChild(el);
   });
 
-  var fr=document.getElementById('fref');fr.innerHTML='';
-  var FM={2:50,3:33.33,4:25,5:20,6:16.67,7:14.28,8:12.5,9:11.11,10:10,11:9.09,12:8.33,13:7.69,14:7.14,15:6.67,16:6.25,17:5.88,18:5.55,19:5.26,20:5};
-  Object.keys(FM).forEach(function(d){fr.appendChild(mkEl('div','1/'+d+' = '+FM[d]+'%','ref-item',''));});
+  var FM = {2:50,3:33.33,4:25,5:20,6:16.67,7:14.28,8:12.5,9:11.11,10:10,11:9.09,12:8.33,13:7.69,14:7.14,15:6.67,16:6.25,17:5.88,18:5.55,19:5.26,20:5};
+  var fr = document.getElementById('fref'); fr.innerHTML = '';
+  Object.keys(FM).forEach(function(d) { fr.appendChild(mkEl('div','1/'+d+' = '+FM[d]+'%','ref-item','')); });
+  var dr = document.getElementById('dref'); dr.innerHTML = '';
+  FRACS.filter(function(f){return f.d<=9&&f.n>1;}).forEach(function(f) {
+    dr.appendChild(mkEl('div', f.n+'/'+f.d+' = '+f.pct+'%', 'ref-item bl', ''));
+  });
 
-  var dr=document.getElementById('dref');dr.innerHTML='';
-  FRACS.filter(function(f){return f.d<=9&&f.n>1;}).forEach(function(f){dr.appendChild(mkEl('div',f.n+'/'+f.d+' = '+f.pct+'%','ref-item bl',''));});
-
-  var pr=document.getElementById('patref');pr.innerHTML='';
-  var pats=[['AP - Constant Diff','T2-T1=T3-T2=constant'],['Double Difference','Diffs form an AP'],['GP - Constant Ratio','T2/T1=T3/T2=constant'],['xR+C','Multiply then add/subtract C'],['n² Pattern','Consecutive squares'],['n² +/- n','n²+n or n²-n'],['n³ Pattern','Consecutive cubes'],['Prime Diffs','Diffs: 2,3,5,7,11,13...'],['Fibonacci','Each = sum of prev two'],['Alternating Two','Separate odd/even positions'],['xR Alt +/-','Alternate add/subtract'],['Increasing Diff','Diffs form AP'],['Add Sq (1,4,9...)','Diffs are squares'],['Add Cu (1,8,27...)','Diffs are cubes'],['Incr Multiplier','x2,x3,x4... ratio+1']];
-  pats.forEach(function(p){
-    var el=document.createElement('div');el.style.cssText='display:flex;gap:8px;font-size:12px;padding:5px 0;border-bottom:1px solid var(--navy-border);flex-wrap:wrap;align-items:baseline';
-    el.appendChild(mkEl('span',p[0],'','color:var(--teal);min-width:140px;font-weight:600;font-size:12px'));
-    el.appendChild(mkEl('span',p[1],'','color:var(--txt-faint);font-size:12px'));pr.appendChild(el);
+  var pr = document.getElementById('patref'); pr.innerHTML = '';
+  var pats = [
+    ['AP','Constant difference. T2−T1 = T3−T2'],
+    ['Double Diff','Differences form an AP'],
+    ['GP','Constant ratio. T2/T1 = T3/T2'],
+    ['×R+C','Multiply then ± constant'],
+    ['n² ± k','Consecutive squares'],
+    ['n² ± n','n²+n or n²−n'],
+    ['n³ ± k','Consecutive cubes'],
+    ['Prime Diffs','Diffs: 2,3,5,7,11,13…'],
+    ['Fibonacci','Each = sum of prev two'],
+    ['Alternating','Separate odd/even positions'],
+    ['Add Sq','Add 1²,2²,3²…'],
+    ['Add Cu','Add 1³,2³,3³…'],
+    ['Incr ×','Ratios: ×2,×3,×4…'],
+  ];
+  pats.forEach(function(p) {
+    var el = document.createElement('div'); el.className = 'pat-row';
+    el.appendChild(mkEl('span', p[0], 'pat-name', ''));
+    el.appendChild(mkEl('span', p[1], 'pat-desc', ''));
+    pr.appendChild(el);
   });
 }
 
 // ============================================================
-// NAVIGATION
+// NAVIGATION & SETTINGS
 // ============================================================
-function goTo(name){
-  document.querySelectorAll('.sc').forEach(function(s){s.classList.remove('on');});
-  document.getElementById('sc-'+name).classList.add('on');
-  if(name==='practice'){loadQ();document.getElementById('p-lv').textContent=G.lv.toUpperCase();document.getElementById('p-md').style.display=G.mode==='timed'?'inline-block':'none';renderMT();}
-  if(name==='hardzone'){hzI=0;renderHZ();}
-  if(name==='revision')renderRev();
-  updHB();
+function goTo(name) {
+  document.querySelectorAll('.sc').forEach(function(s) { s.classList.remove('on'); });
+  document.getElementById('sc-' + name).classList.add('on');
+  if (name === 'hardzone') { hzI = 0; renderHZ(); }
+  if (name === 'revision') renderRevision();
+  window.scrollTo(0, 0);
 }
 
-function renderMT(){
-  var mods=[{id:'simplification',lb:'Simplification'},{id:'approximation',lb:'Approximation'},{id:'missing',lb:'Missing Number'},{id:'wrong',lb:'Wrong Number'}];
-  var con=document.getElementById('mtabs');con.innerHTML='';
-  mods.forEach(function(m){
-    var btn=mkEl('button',m.lb,'mt-btn'+(G.mod===m.id?' on':''),'');
-    btn.onclick=(function(id){return function(){G.mod=id;renderMT();loadQ();};})(m.id);
-    con.appendChild(btn);
+function confirmExit() {
+  if (!G.answered && G.qIdx > 0) {
+    if (!confirm('Exit quiz? Your progress will be lost.')) return;
+  }
+  clearInterval(G.tmr);
+  goTo('home');
+}
+
+function selMod(m) {
+  G.mod = m;
+  ['simplification','approximation','missing','wrong'].forEach(function(id) {
+    var el = document.getElementById('mb-' + id);
+    if (el) el.className = 'mod-card' + (id === m ? ' sel' : '');
   });
 }
 
-function selMod(m){G.mod=m;['simplification','approximation','missing','wrong'].forEach(function(id){var el=document.getElementById('mb-'+id);if(el)el.className='mod-card'+(id===m?' on':'');});}
-function selLv(l){G.lv=l;document.getElementById('lv-prelims').className='sel-btn'+(l==='prelims'?' on-teal':'');document.getElementById('lv-mains').className='sel-btn'+(l==='mains'?' on-teal':'');}
-function selMode(m){G.mode=m;document.getElementById('md-practice').className='sel-btn'+(m==='practice'?' on-violet':'');document.getElementById('md-timed').className='sel-btn'+(m==='timed'?' on-violet':'');document.getElementById('tset').style.display=m==='timed'?'block':'none';}
-function setTPQ(v){G.tpq=parseInt(v);document.getElementById('tpqv').textContent=v+'s';}
-function togDk(){G.dark=!G.dark;document.body.className=G.dark?'':'light';document.getElementById('dkb1').textContent=G.dark?'\u2600 Light':'\u263d Dark';document.getElementById('dkb2').textContent=G.dark?'\u2600':'\u263d';}
+function selLv(l) {
+  G.lv = l;
+  document.getElementById('lv-prelims').className = 'sel-btn' + (l === 'prelims' ? ' on-blue' : '');
+  document.getElementById('lv-mains').className = 'sel-btn' + (l === 'mains' ? ' on-blue' : '');
+}
 
+function selMode(m) {
+  G.mode = m;
+  document.getElementById('md-practice').className = 'sel-btn' + (m === 'practice' ? ' on-blue' : '');
+  document.getElementById('md-timed').className = 'sel-btn' + (m === 'timed' ? ' on-blue' : '');
+  document.getElementById('tset').style.display = m === 'timed' ? 'block' : 'none';
+  document.getElementById('p-md-tag').style.display = m === 'timed' ? 'inline-flex' : 'none';
+}
+
+function selCount(n) {
+  G.totalQ = n;
+  document.querySelectorAll('.qcount-btn').forEach(function(b) {
+    b.className = 'qcount-btn' + (parseInt(b.textContent) === n ? ' on' : '');
+  });
+}
+
+function setTPQ(v) {
+  G.tpq = parseInt(v);
+  document.getElementById('tpqv').textContent = v + 's';
+}
+
+function togDk() {
+  G.dark = !G.dark;
+  document.body.className = G.dark ? 'dark' : '';
+  ['dkb1','dkb2'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = G.dark ? '☽ Dark' : '☀ Light';
+  });
+}
+
+// ============================================================
 // INIT
-selMod('simplification');selLv('prelims');selMode('practice');updHB();
+// ============================================================
+selMod('simplification');
+selLv('prelims');
+selMode('practice');
+selCount(10);
+updHardBadge();
 
 </script>
 </body>
