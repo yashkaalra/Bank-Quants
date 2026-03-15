@@ -337,6 +337,14 @@ input[type=range]{width:100%;accent-color:var(--blue-hl);cursor:pointer;height:2
         <div class="mc-desc">Find the incorrect term</div>
       </button>
     </div>
+    <button class="mod-card" id="mb-mix" onclick="selMod('mix')" style="width:100%;margin-bottom:12px;display:flex;align-items:center;gap:14px;padding:16px 18px">
+      <span style="font-size:24px;flex-shrink:0">&#9881;</span>
+      <div>
+        <div class="mc-label" style="font-size:14px">Full Mix Mode</div>
+        <div class="mc-desc">10 questions of each type &mdash; 40 questions total covering all modules</div>
+      </div>
+      <span id="mix-badge" style="margin-left:auto;background:var(--blue-hl);color:#fff;font-size:11px;font-weight:800;padding:3px 10px;border-radius:12px;white-space:nowrap;display:none">40 Qs</span>
+    </button>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
       <div class="card" style="padding:14px">
@@ -355,13 +363,22 @@ input[type=range]{width:100%;accent-color:var(--blue-hl);cursor:pointer;height:2
       </div>
     </div>
 
-    <div class="card" style="margin-bottom:12px;padding:14px">
+    <div id="qcount-card" class="card" style="margin-bottom:12px;padding:14px">
       <div class="sec">Number of Questions</div>
       <div class="qcount-grid">
         <button class="qcount-btn" onclick="selCount(10)">10</button>
         <button class="qcount-btn" onclick="selCount(20)">20</button>
         <button class="qcount-btn" onclick="selCount(30)">30</button>
         <button class="qcount-btn" onclick="selCount(50)">50</button>
+      </div>
+    </div>
+    <div id="mix-info-card" class="card" style="margin-bottom:12px;padding:14px;display:none;border:1.5px solid var(--sky-bd);background:var(--sky-lt)">
+      <div class="sec" style="color:var(--blue-hl)">Mix Mode &mdash; 40 Questions</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px">
+        <div style="font-size:12px;font-weight:600;color:var(--txt2);background:var(--card);border:1px solid var(--border2);border-radius:6px;padding:7px 10px">&#8721; 10 &times; Simplification</div>
+        <div style="font-size:12px;font-weight:600;color:var(--txt2);background:var(--card);border:1px solid var(--border2);border-radius:6px;padding:7px 10px">&#8776; 10 &times; Approximation</div>
+        <div style="font-size:12px;font-weight:600;color:var(--txt2);background:var(--card);border:1px solid var(--border2);border-radius:6px;padding:7px 10px">? 10 &times; Missing Number</div>
+        <div style="font-size:12px;font-weight:600;color:var(--txt2);background:var(--card);border:1px solid var(--border2);border-radius:6px;padding:7px 10px">&#10007; 10 &times; Wrong Number</div>
       </div>
     </div>
 
@@ -1191,7 +1208,17 @@ function genQ(){
   if(G.mod==='approximation')return genApprox(G.lv);
   if(G.mod==='missing')return genMissing(G.lv);
   if(G.mod==='wrong')return genWrong(G.lv);
+  if(G.mod==='mix')return genMixQ();
   return genSimp(G.lv);
+}
+function genMixQ(){
+  // Used only as fallback; mix generates all questions upfront in startQuiz
+  var mods=['simplification','approximation','missing','wrong'];
+  var m=pick(mods);
+  if(m==='simplification')return genSimp(G.lv);
+  if(m==='approximation')return genApprox(G.lv);
+  if(m==='missing')return genMissing(G.lv);
+  return genWrong(G.lv);
 }
 
 // ============================================================
@@ -1234,9 +1261,19 @@ function updHardBadge() {
 // QUIZ FLOW
 // ============================================================
 function startQuiz() {
-  // Build question set
   G.questions = [];
-  for (var i = 0; i < G.totalQ; i++) G.questions.push(genQ());
+  if (G.mod === 'mix') {
+    // Build 10 of each type, then shuffle
+    var qs = [];
+    for (var i = 0; i < 10; i++) qs.push(genSimp(G.lv));
+    for (var i = 0; i < 10; i++) qs.push(genApprox(G.lv));
+    for (var i = 0; i < 10; i++) qs.push(genMissing(G.lv));
+    for (var i = 0; i < 10; i++) qs.push(genWrong(G.lv));
+    // Shuffle so types are interleaved
+    G.questions = shuffle(qs);
+  } else {
+    for (var i = 0; i < G.totalQ; i++) G.questions.push(genQ());
+  }
   G.qIdx = 0;
   G.answered = false;
   G.stats = { correct: 0, wrong: 0, times: [] };
@@ -1265,6 +1302,15 @@ function loadQ() {
   // Tags
   document.getElementById('p-type-tag').textContent = q.type;
   document.getElementById('p-topic-tag').textContent = q.topic;
+  // Update level tag
+  var lvTag = document.getElementById('p-lv-tag');
+  if (lvTag) {
+    if (G.mod === 'mix') {
+      lvTag.textContent = 'MIX • ' + G.lv.toUpperCase();
+    } else {
+      lvTag.textContent = G.lv.toUpperCase();
+    }
+  }
 
   // Pattern badge for series
   var pb = document.getElementById('p-pat-badge');
@@ -1494,7 +1540,8 @@ function showResults() {
   var title = pct >= 80 ? 'Excellent Performance!' : pct >= 60 ? 'Good Attempt!' : pct >= 40 ? 'Needs Improvement' : 'Keep Practising!';
   var sub = pct >= 80 ? 'You are exam-ready for this topic' : pct >= 60 ? 'Review the wrong answers below' : 'Focus on the solution steps carefully';
   document.getElementById('r-title').textContent = title;
-  document.getElementById('r-sub').textContent = 'Accuracy: ' + pct + '% | ' + cor + '/' + total + ' correct';
+  var modLabel = G.mod === 'mix' ? 'Mix Mode (All Types)' : G.mod.charAt(0).toUpperCase() + G.mod.slice(1);
+  document.getElementById('r-sub').textContent = modLabel + ' • ' + G.lv.toUpperCase() + ' • ' + pct + '% accuracy';
 
   // Q list
   var list = document.getElementById('r-qlist');
@@ -1778,10 +1825,25 @@ function confirmExit() {
 
 function selMod(m) {
   G.mod = m;
-  ['simplification','approximation','missing','wrong'].forEach(function(id) {
+  // Update all mod card styles
+  ['simplification','approximation','missing','wrong','mix'].forEach(function(id) {
     var el = document.getElementById('mb-' + id);
-    if (el) el.className = 'mod-card' + (id === m ? ' sel' : '');
+    if (!el) return;
+    if (id === 'mix') {
+      el.className = 'mod-card' + (m === 'mix' ? ' sel' : '');
+      el.style.display = 'flex';
+    } else {
+      el.className = 'mod-card' + (id === m ? ' sel' : '');
+    }
   });
+  // Show/hide mix badge
+  var badge = document.getElementById('mix-badge');
+  if (badge) badge.style.display = m === 'mix' ? 'inline' : 'none';
+  // Show/hide qcount vs mix info
+  var qcc = document.getElementById('qcount-card');
+  var mic = document.getElementById('mix-info-card');
+  if (qcc) qcc.style.display = m === 'mix' ? 'none' : 'block';
+  if (mic) mic.style.display = m === 'mix' ? 'block' : 'none';
 }
 
 function selLv(l) {
@@ -1803,6 +1865,8 @@ function selCount(n) {
   document.querySelectorAll('.qcount-btn').forEach(function(b) {
     b.className = 'qcount-btn' + (parseInt(b.textContent) === n ? ' on' : '');
   });
+  // If mix was selected, switch back to last module or simplification
+  if (G.mod === 'mix') selMod('simplification');
 }
 
 function setTPQ(v) {
