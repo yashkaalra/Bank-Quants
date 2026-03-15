@@ -262,6 +262,35 @@ body.dark .qbox{background:var(--bg2)}
 .pat-name{color:var(--blue-hl);min-width:140px;font-weight:700;font-size:12px}
 .pat-desc{color:var(--txt3);font-size:12px}
 
+/* ── HISTORY ── */
+.hist-item{background:var(--card);border:1px solid var(--border2);border-radius:var(--r2);padding:14px 16px;margin-bottom:8px;cursor:pointer;transition:.15s;position:relative;overflow:hidden}
+.hist-item:active{background:var(--bg2)}
+.hist-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:4px 0 0 4px}
+.hist-item.score-ex::before{background:var(--green)}
+.hist-item.score-gd::before{background:var(--blue-hl)}
+.hist-item.score-av::before{background:var(--amber)}
+.hist-item.score-lw::before{background:var(--red)}
+.hist-row{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.hist-score{font-size:22px;font-weight:800;font-family:var(--mono);line-height:1}
+.hist-meta{font-size:11px;color:var(--txt3);font-weight:600;margin-top:3px}
+.hist-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+.hist-detail{font-size:12px;color:var(--txt2);margin-top:8px;padding-top:8px;border-top:1px solid var(--border2);display:none}
+.hist-detail.open{display:block}
+.hist-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px}
+.hist-stat{background:var(--bg2);border-radius:6px;padding:7px 6px;text-align:center}
+.hist-stat-v{font-size:15px;font-weight:800;font-family:var(--mono)}
+.hist-stat-l{font-size:10px;color:var(--txt4);font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-top:2px}
+.hist-streak{display:flex;align-items:center;gap:6px;padding:10px 14px;background:var(--amber-lt);border:1px solid var(--amber-bd);border-radius:var(--r);margin-bottom:14px}
+.hist-empty{text-align:center;padding:48px 20px;color:var(--txt3)}
+.hist-chart{display:flex;align-items:flex-end;gap:3px;height:80px;margin:14px 0 6px}
+.hist-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0}
+.hist-bar{width:100%;border-radius:3px 3px 0 0;transition:.3s;cursor:pointer;min-height:4px}
+.hist-bar-lbl{font-size:9px;color:var(--txt4);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;text-align:center}
+.stats-summary{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:14px}
+.sum-card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r2);padding:12px 14px;box-shadow:var(--shadow)}
+.sum-val{font-size:20px;font-weight:800;font-family:var(--mono);line-height:1;margin-bottom:3px}
+.sum-lbl{font-size:11px;color:var(--txt3);font-weight:600}
+
 /* ── ANIMATIONS ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
@@ -302,6 +331,7 @@ input[type=range]{width:100%;accent-color:var(--blue-hl);cursor:pointer;height:2
       <span class="brand-name">Quant<span>Master</span></span>
     </div>
     <div class="topbar-actions">
+      <button class="topbar-btn" onclick="goTo('history')">&#128200; History</button>
       <button class="topbar-btn" onclick="goTo('hardzone')">&#9733; Tricky <span class="topbar-badge" id="hbadge" style="display:none">0</span></button>
       <button class="topbar-btn" onclick="togDk()" id="dkb1">&#9788;</button>
     </div>
@@ -480,8 +510,9 @@ input[type=range]{width:100%;accent-color:var(--blue-hl);cursor:pointer;height:2
   </div>
 
   <div class="content">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
-      <button class="btn btn-primary btn-full" onclick="retakeQuiz()">Retake Quiz</button>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px">
+      <button class="btn btn-primary btn-full" onclick="retakeQuiz()">Retake</button>
+      <button class="btn btn-ghost btn-full" onclick="goTo('history')" style="font-size:13px">&#128200; History</button>
       <button class="btn btn-ghost btn-full" onclick="goTo('home')">&#8592; Home</button>
     </div>
 
@@ -533,6 +564,21 @@ input[type=range]{width:100%;accent-color:var(--blue-hl);cursor:pointer;height:2
     <div class="sec">Series Patterns</div>
     <div class="card" style="padding:14px" id="patref"></div>
   </div>
+</div>
+
+
+<!-- ════════════════ HISTORY ════════════════ -->
+<div id="sc-history" class="sc">
+  <div class="topbar">
+    <div class="topbar-brand">
+      <button class="topbar-btn" onclick="goTo('home')" style="padding:6px 10px">&#8592; Back</button>
+      <span style="color:#fff;font-weight:700;font-size:15px">&#128200; My History</span>
+    </div>
+    <div class="topbar-actions">
+      <button class="topbar-btn" id="hist-clear-btn" onclick="clrHistory()" style="color:#fca5a5">Clear All</button>
+    </div>
+  </div>
+  <div class="content" id="hist-content"></div>
 </div>
 
 </div><!-- #app -->
@@ -1576,6 +1622,20 @@ function showResults() {
     list.appendChild(item);
   });
 
+  // Save to history
+  saveHistory({
+    date: new Date().toISOString(),
+    mod: G.mod,
+    lv: G.lv,
+    mode: G.mode,
+    total: total,
+    correct: cor,
+    wrong: total - cor,
+    pct: pct,
+    avgTime: avgTime,
+    tpq: G.tpq
+  });
+
   goTo('result');
 }
 
@@ -1807,11 +1867,241 @@ function renderRevision() {
 // ============================================================
 // NAVIGATION & SETTINGS
 // ============================================================
+// ============================================================
+// HISTORY SYSTEM
+// ============================================================
+var historyKey = 'qm_history';
+
+function loadHistory() {
+  try { return JSON.parse(localStorage.getItem(historyKey) || '[]'); } catch(e) { return []; }
+}
+
+function saveHistory(entry) {
+  var hist = loadHistory();
+  hist.unshift(entry); // newest first
+  if (hist.length > 200) hist = hist.slice(0, 200); // cap at 200 entries
+  localStorage.setItem(historyKey, JSON.stringify(hist));
+}
+
+function clrHistory() {
+  var hist = loadHistory();
+  if (!hist.length) return;
+  if (!confirm('Delete all ' + hist.length + ' history entries? This cannot be undone.')) return;
+  localStorage.removeItem(historyKey);
+  renderHistory();
+}
+
+function fmtDate(iso) {
+  var d = new Date(iso);
+  var now = new Date();
+  var diff = Math.floor((now - d) / 1000);
+  if (diff < 60) return 'Just now';
+  if (diff < 3600) return Math.floor(diff/60) + 'm ago';
+  if (diff < 86400) return Math.floor(diff/3600) + 'h ago';
+  if (diff < 172800) return 'Yesterday ' + d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+  return d.toLocaleDateString([], {day:'numeric',month:'short',year:'numeric'}) + ' ' + d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+}
+
+function fmtDateShort(iso) {
+  var d = new Date(iso);
+  return d.toLocaleDateString([], {day:'numeric',month:'short'});
+}
+
+function scoreClass(pct) {
+  if (pct >= 80) return 'score-ex';
+  if (pct >= 60) return 'score-gd';
+  if (pct >= 40) return 'score-av';
+  return 'score-lw';
+}
+
+function scoreColor(pct) {
+  if (pct >= 80) return 'var(--green)';
+  if (pct >= 60) return 'var(--blue-hl)';
+  if (pct >= 40) return 'var(--amber)';
+  return 'var(--red)';
+}
+
+function modLabel(m) {
+  var map = {simplification:'Simplification',approximation:'Approximation',missing:'Missing No.',wrong:'Wrong No.',mix:'Full Mix'};
+  return map[m] || m;
+}
+
+function renderHistory() {
+  var con = document.getElementById('hist-content');
+  if (!con) return;
+  var hist = loadHistory();
+  con.innerHTML = '';
+
+  if (!hist.length) {
+    con.innerHTML = '<div class="hist-empty"><div style="font-size:2.5rem;margin-bottom:14px">&#128200;</div><div style="font-size:15px;font-weight:600;margin-bottom:6px">No history yet</div><div style="font-size:13px;color:var(--txt4)">Complete a quiz to see your results here</div></div>';
+    return;
+  }
+
+  // ── Summary stats ──
+  var totalTests = hist.length;
+  var avgPct = Math.round(hist.reduce(function(s,h){return s+h.pct;},0)/hist.length);
+  var best = Math.max.apply(null, hist.map(function(h){return h.pct;}));
+  var totalQs = hist.reduce(function(s,h){return s+h.total;},0);
+
+  var sumDiv = document.createElement('div');
+  sumDiv.className = 'stats-summary';
+  [
+    {v: totalTests, l: 'Tests Taken'},
+    {v: avgPct + '%', l: 'Average Score'},
+    {v: best + '%', l: 'Best Score'},
+    {v: totalQs, l: 'Total Questions'}
+  ].forEach(function(s) {
+    var card = document.createElement('div');
+    card.className = 'sum-card';
+    card.appendChild(mkEl('div', String(s.v), 'sum-val', 'color:var(--blue-hl)'));
+    card.appendChild(mkEl('div', s.l, 'sum-lbl', ''));
+    sumDiv.appendChild(card);
+  });
+  con.appendChild(sumDiv);
+
+  // ── Streak ──
+  var streak = calcStreak(hist);
+  if (streak > 0) {
+    var strDiv = document.createElement('div');
+    strDiv.className = 'hist-streak';
+    strDiv.innerHTML = '<span style="font-size:20px">&#128293;</span><div><div style="font-size:13px;font-weight:800;color:var(--amber)">' + streak + '-day streak!</div><div style="font-size:11px;color:var(--txt3)">Keep practising daily to maintain it</div></div>';
+    con.appendChild(strDiv);
+  }
+
+  // ── Score bar chart (last 14 entries) ──
+  var chartData = hist.slice(0,14).reverse();
+  if (chartData.length >= 2) {
+    var secLbl = mkEl('div', 'Recent Scores', 'sec', 'margin-bottom:6px');
+    con.appendChild(secLbl);
+    var chartDiv = document.createElement('div');
+    chartDiv.className = 'hist-chart';
+    chartData.forEach(function(h) {
+      var wrap = document.createElement('div');
+      wrap.className = 'hist-bar-wrap';
+      var bar = document.createElement('div');
+      bar.className = 'hist-bar';
+      bar.style.height = Math.max(h.pct, 4) + '%';
+      bar.style.background = scoreColor(h.pct);
+      bar.title = h.pct + '% — ' + fmtDateShort(h.date);
+      wrap.appendChild(bar);
+      wrap.appendChild(mkEl('div', fmtDateShort(h.date), 'hist-bar-lbl', ''));
+      chartDiv.appendChild(wrap);
+    });
+    con.appendChild(chartDiv);
+  }
+
+  // ── Per-module stats ──
+  var modStats = {};
+  hist.forEach(function(h) {
+    if (!modStats[h.mod]) modStats[h.mod] = {count:0,pctSum:0};
+    modStats[h.mod].count++;
+    modStats[h.mod].pctSum += h.pct;
+  });
+  var modKeys = Object.keys(modStats);
+  if (modKeys.length) {
+    var msLabel = mkEl('div', 'Module Performance', 'sec', 'margin-bottom:8px');
+    con.appendChild(msLabel);
+    var msGrid = document.createElement('div');
+    msGrid.style.cssText = 'display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:14px';
+    modKeys.forEach(function(m) {
+      var ms = modStats[m];
+      var avg = Math.round(ms.pctSum / ms.count);
+      var card = document.createElement('div');
+      card.className = 'sum-card';
+      card.appendChild(mkEl('div', avg + '%', 'sum-val', 'color:' + scoreColor(avg)));
+      card.appendChild(mkEl('div', modLabel(m), 'sum-lbl', ''));
+      card.appendChild(mkEl('div', ms.count + ' test' + (ms.count!==1?'s':''), '', 'font-size:10px;color:var(--txt4);font-weight:600;margin-top:2px'));
+      msGrid.appendChild(card);
+    });
+    con.appendChild(msGrid);
+  }
+
+  // ── History list ──
+  var listLabel = mkEl('div', 'All Tests', 'sec', 'margin-bottom:8px');
+  con.appendChild(listLabel);
+
+  hist.forEach(function(h, i) {
+    var item = document.createElement('div');
+    item.className = 'hist-item ' + scoreClass(h.pct);
+    item.style.paddingLeft = '20px';
+
+    var topRow = document.createElement('div');
+    topRow.className = 'hist-row';
+
+    // Left: score + date
+    var leftDiv = document.createElement('div');
+    leftDiv.appendChild(mkEl('div', h.pct + '%', 'hist-score', 'color:' + scoreColor(h.pct)));
+    leftDiv.appendChild(mkEl('div', fmtDate(h.date), 'hist-meta', ''));
+    topRow.appendChild(leftDiv);
+
+    // Right: correct/total
+    var rightDiv = document.createElement('div');
+    rightDiv.style.cssText = 'text-align:right;flex-shrink:0';
+    rightDiv.appendChild(mkEl('div', h.correct + '/' + h.total, '', 'font-size:18px;font-weight:800;font-family:var(--mono);color:var(--txt2)'));
+    rightDiv.appendChild(mkEl('div', 'Avg ' + h.avgTime + 's/q', '', 'font-size:11px;color:var(--txt4);font-weight:600'));
+    topRow.appendChild(rightDiv);
+    item.appendChild(topRow);
+
+    // Tags
+    var tagRow = document.createElement('div');
+    tagRow.className = 'hist-tags';
+    tagRow.appendChild(mkEl('span', modLabel(h.mod), 'tag tag-blue', 'font-size:10px'));
+    tagRow.appendChild(mkEl('span', h.lv.toUpperCase(), 'tag tag-slate', 'font-size:10px'));
+    if (h.mode === 'timed') tagRow.appendChild(mkEl('span', '⏱ Timed ' + h.tpq + 's', 'tag tag-amber', 'font-size:10px'));
+    item.appendChild(tagRow);
+
+    // Expandable detail
+    var detail = document.createElement('div');
+    detail.className = 'hist-detail';
+    var statRow = document.createElement('div');
+    statRow.className = 'hist-stat-row';
+    [
+      {v: h.correct, l: 'Correct', col: 'var(--green)'},
+      {v: h.wrong, l: 'Wrong', col: 'var(--red)'},
+      {v: h.avgTime + 's', l: 'Avg Time', col: 'var(--blue-hl)'}
+    ].forEach(function(s) {
+      var box = document.createElement('div'); box.className = 'hist-stat';
+      box.appendChild(mkEl('div', String(s.v), 'hist-stat-v', 'color:' + s.col));
+      box.appendChild(mkEl('div', s.l, 'hist-stat-l', ''));
+      statRow.appendChild(box);
+    });
+    detail.appendChild(statRow);
+    item.appendChild(detail);
+
+    // Toggle detail on click
+    item.onclick = function() {
+      detail.classList.toggle('open');
+    };
+
+    con.appendChild(item);
+  });
+}
+
+function calcStreak(hist) {
+  if (!hist.length) return 0;
+  var today = new Date(); today.setHours(0,0,0,0);
+  var dates = hist.map(function(h) {
+    var d = new Date(h.date); d.setHours(0,0,0,0); return d.getTime();
+  });
+  var seen = {}; var uniqueDates = dates.filter(function(d){if(seen[d])return false;seen[d]=true;return true;}).sort(function(a,b){return b-a;});
+  // Check if most recent is today or yesterday
+  var diff0 = Math.round((today.getTime() - uniqueDates[0]) / 86400000);
+  if (diff0 > 1) return 0;
+  var streak = 1;
+  for (var i = 1; i < uniqueDates.length; i++) {
+    var diff = Math.round((uniqueDates[i-1] - uniqueDates[i]) / 86400000);
+    if (diff === 1) streak++;
+    else break;
+  }
+  return streak;
+}
+
 function goTo(name) {
   document.querySelectorAll('.sc').forEach(function(s) { s.classList.remove('on'); });
   document.getElementById('sc-' + name).classList.add('on');
   if (name === 'hardzone') { hzI = 0; renderHZ(); }
   if (name === 'revision') renderRevision();
+  if (name === 'history') renderHistory();
   window.scrollTo(0, 0);
 }
 
