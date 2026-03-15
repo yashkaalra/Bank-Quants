@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuantMaster - IBPS SBI RBI Bank Exam Practice</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Georgia,serif;background:#0f0f13;color:#e8e4da;min-height:100vh}
+:root{
+  --bg:#0f0f13;--bg2:#17171d;--bg3:#1e1e26;--bg4:#252530;
+  --gold:#c9a84c;--gold2:#e8c97a;--acc:#4c8fc9;
+  --grn:#4ca87c;--red:#c94c4c;--pur:#8b5cf6;
+  --tx:#e8e4da;--tx2:#a8a49a;--tx3:#68645a;
+  --bd:#2a2a35;--bd2:#3a3a48
+}
+body.light{background:#f5f3ee;color:#1a1814;--bg:#f5f3ee;--bg2:#eceae4;--bg3:#e4e0d8;--bg4:#dcd8ce;--tx:#1a1814;--tx2:#4a4640;--tx3:#8a8680;--bd:#d0ccc4;--bd2:#c0bbb4}
+.card{background:var(--bg2);border:1px solid var(--bd);border-radius:12px;padding:20px}
+.btn{cursor:pointer;font-family:inherit;border:none;outline:none;border-radius:8px;padding:8px 18px;font-size:14px;font-weight:500;transition:all .2s}
+.btn-g{background:var(--gold);color:#0f0f13}.btn-g:hover{background:var(--gold2)}
+.btn-o{background:transparent;border:1px solid var(--bd2);color:var(--tx2);font-family:inherit}.btn-o:hover{border-color:var(--gold);color:var(--gold)}
+.tag{display:inline-block;padding:3px 8px;border-radius:4px;font-size:12px;font-weight:500}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.fi{animation:fadeIn .3s ease}.sk{animation:shake .3s ease}
+#app{max-width:720px;margin:0 auto;padding:16px}
+.sc{display:none}.sc.on{display:block}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.og{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.ob{padding:12px 16px;border-radius:8px;text-align:left;font-size:15px;cursor:pointer;transition:all .2s;font-family:monospace;background:var(--bg3);border:1px solid var(--bd);color:var(--tx2);width:100%}
+.ob:hover{border-color:var(--gold);color:var(--gold)}
+.ob.cor{background:rgba(76,168,124,.15);border-color:#4ca87c;color:#4ca87c}
+.ob.wrg{background:rgba(201,76,76,.15);border-color:#c94c4c;color:#c94c4c}
+.ob.dim{color:var(--tx3);cursor:default}
+.sb{background:rgba(76,168,124,.08);border:1px solid rgba(76,168,124,.3);border-radius:8px;padding:14px;margin-top:4px;animation:fadeIn .3s ease}
+.ss{font-size:13px;color:var(--tx2);padding:4px 0 4px 10px;border-left:2px solid var(--bd2);margin-bottom:4px;line-height:1.6}
+.ss.tk{border-left-color:var(--gold);color:var(--gold)}
+.ss.hl{border-left-color:var(--pur);color:#a78bfa}
+.stb{background:var(--bg3);border-radius:8px;padding:10px 12px;text-align:center;border:1px solid var(--bd)}
+.sv{font-size:20px;font-weight:700}.sl{font-size:11px;color:var(--tx3);margin-top:2px}
+.mt{display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;padding-bottom:4px}
+.mt-btn{white-space:nowrap;padding:7px 14px;border-radius:8px;font-size:13px;cursor:pointer;border:1px solid var(--bd);background:var(--bg3);color:var(--tx2);transition:all .2s;font-family:inherit}
+.mt-btn.on{background:var(--gold);color:#0f0f13;border-color:var(--gold)}
+.qb{font-size:16px;line-height:1.9;color:var(--tx);padding:16px;background:var(--bg);border-radius:8px;border:1px solid var(--bd);font-family:monospace;white-space:pre-wrap;margin-bottom:18px;letter-spacing:.3px}
+.tmb{width:100px;height:5px;background:var(--bg4);border-radius:3px;overflow:hidden;display:inline-block;vertical-align:middle}
+.tmf{height:100%;transition:width .5s,background .5s}
+.tb{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px}
+.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.lb{padding:8px 10px;border-radius:8px;font-size:13px;cursor:pointer;border:1px solid var(--bd);background:var(--bg3);color:var(--tx2);transition:all .2s;flex:1;text-align:center;font-family:inherit}
+.lb.ab{border-color:var(--acc);background:rgba(76,143,201,.15);color:#7ab3e8}
+.lb.ag{border-color:var(--gold);background:rgba(201,168,76,.15);color:var(--gold)}
+.lb.ap{border-color:var(--pur);background:rgba(139,92,246,.15);color:#a78bfa}
+.ri{background:var(--bg3);border-radius:4px;padding:4px 8px;font-size:12px;font-family:monospace;color:var(--tx2)}
+.ri.bl{background:rgba(76,143,201,.1);border:1px solid rgba(76,143,201,.2);color:#7ab3e8}
+.rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:5px}
+input[type=range]{width:100%;accent-color:var(--pur);cursor:pointer}
+.pb{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:rgba(139,92,246,.15);color:#a78bfa;border:1px solid rgba(139,92,246,.3);margin-top:4px}
+.chip{padding:4px 10px;border-radius:4px;font-family:monospace;font-size:13px;background:var(--bg4);border:1px solid var(--bd);color:var(--tx2);display:inline-block}
+.chip.hi{background:rgba(76,168,124,.2);border-color:#4ca87c;color:#4ca87c}
+.chip.er{background:rgba(201,76,76,.2);border-color:#c94c4c;color:#c94c4c}
+.dchip{padding:2px 8px;border-radius:4px;font-family:monospace;font-size:12px;background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);color:#a78bfa;display:inline-block}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- HOME -->
+<div id="sc-home" class="sc on">
+  <div style="text-align:center;margin-bottom:28px;padding-top:20px">
+    <div style="font-size:2.4rem;margin-bottom:8px">&#128208;</div>
+    <h1 style="font-size:1.8rem;font-weight:700;color:var(--gold);letter-spacing:-.02em;margin-bottom:6px">QuantMaster</h1>
+    <div style="color:var(--tx3);font-size:13px">Strictly IBPS &bull; SBI &bull; RBI Pattern &mdash; Prelims &amp; Mains</div>
+  </div>
+  <div class="card" style="margin-bottom:12px">
+    <div style="font-size:11px;color:var(--tx3);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em">Module</div>
+    <div class="g2">
+      <button class="lb" id="mb-simplification" onclick="selMod('simplification')" style="padding:14px;text-align:left"><div style="font-size:1.2rem;margin-bottom:4px">&#8721;</div><div style="font-size:13px;font-weight:500">Simplification</div></button>
+      <button class="lb" id="mb-approximation" onclick="selMod('approximation')" style="padding:14px;text-align:left"><div style="font-size:1.2rem;margin-bottom:4px">&#8776;</div><div style="font-size:13px;font-weight:500">Approximation</div></button>
+      <button class="lb" id="mb-missing" onclick="selMod('missing')" style="padding:14px;text-align:left"><div style="font-size:1.2rem;margin-bottom:4px">?</div><div style="font-size:13px;font-weight:500">Missing Number</div></button>
+      <button class="lb" id="mb-wrong" onclick="selMod('wrong')" style="padding:14px;text-align:left"><div style="font-size:1.2rem;margin-bottom:4px">&#10007;</div><div style="font-size:13px;font-weight:500">Wrong Number</div></button>
+    </div>
+  </div>
+  <div class="g2" style="margin-bottom:12px">
+    <div class="card">
+      <div style="font-size:11px;color:var(--tx3);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">Level</div>
+      <div style="display:flex;gap:6px">
+        <button class="lb" id="lv-prelims" onclick="selLv('prelims')">Prelims</button>
+        <button class="lb" id="lv-mains" onclick="selLv('mains')">Mains</button>
+      </div>
+    </div>
+    <div class="card">
+      <div style="font-size:11px;color:var(--tx3);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">Mode</div>
+      <div style="display:flex;gap:6px">
+        <button class="lb" id="md-practice" onclick="selMode('practice')">Practice</button>
+        <button class="lb" id="md-timed" onclick="selMode('timed')">Timed</button>
+      </div>
+    </div>
+  </div>
+  <div class="card" id="tset" style="margin-bottom:12px;display:none">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+      <span style="font-size:14px;color:var(--tx2)">Time per Question</span>
+      <span id="tpqv" style="font-weight:700;color:var(--pur);font-family:monospace">60s</span>
+    </div>
+    <input type="range" min="15" max="120" step="5" value="60" oninput="setTPQ(this.value)">
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--tx3);margin-top:4px"><span>15s (Hard)</span><span>60s (Normal)</span><span>120s (Easy)</span></div>
+  </div>
+  <div style="display:flex;gap:8px;margin-bottom:10px">
+    <button class="btn btn-g" style="flex:1;padding:14px;font-size:15px;font-weight:700" onclick="goTo('practice')">Start Practice</button>
+    <button class="btn btn-o" style="padding:14px 16px" onclick="goTo('revision')">&#128202;</button>
+    <button class="btn btn-o" id="hbh" style="padding:14px 16px;color:#c94c4c" onclick="goTo('hardzone')">&#128293;</button>
+  </div>
+  <div style="display:flex;justify-content:flex-end"><button class="btn btn-o" style="font-size:13px" onclick="togDk()" id="dkb1">Light Mode</button></div>
+</div>
+
+<!-- PRACTICE -->
+<div id="sc-practice" class="sc">
+  <div class="tb">
+    <div class="row">
+      <button class="btn btn-o" style="padding:6px 10px;font-size:13px" onclick="goTo('home')">&larr; Home</button>
+      <span style="color:var(--gold);font-weight:700">QuantMaster</span>
+      <span class="tag" id="p-lv" style="background:var(--bg4);color:var(--tx3);font-size:11px">PRELIMS</span>
+      <span class="tag" id="p-md" style="display:none;background:rgba(139,92,246,.2);color:#a78bfa;font-size:11px">Timed</span>
+    </div>
+    <div class="row">
+      <button class="btn btn-o" style="font-size:12px" onclick="goTo('revision')">Revision</button>
+      <button class="btn btn-o" id="hbp" style="font-size:12px;color:#c94c4c" onclick="goTo('hardzone')">&#128293; Hard Zone</button>
+      <button class="btn btn-o" style="font-size:12px" onclick="togDk()" id="dkb2">Light</button>
+    </div>
+  </div>
+  <div class="g4" style="margin-bottom:16px">
+    <div class="stb"><div class="sv" id="s-a" style="color:var(--gold)">0</div><div class="sl">Attempted</div></div>
+    <div class="stb"><div class="sv" id="s-c" style="color:var(--grn)">0</div><div class="sl">Correct</div></div>
+    <div class="stb"><div class="sv" id="s-p" style="color:var(--acc)">0%</div><div class="sl">Accuracy</div></div>
+    <div class="stb"><div class="sv" id="s-s" style="color:var(--pur)">0s</div><div class="sl">Avg Speed</div></div>
+  </div>
+  <div class="mt" id="mtabs"></div>
+  <div class="card" id="qcard">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+      <div id="qtags"></div>
+      <div class="row">
+        <span id="twrap" style="display:none;align-items:center;gap:6px"><span class="tmb"><span class="tmf" id="tfill" style="width:100%;background:#4ca87c"></span></span><span id="ttxt" style="font-size:14px;font-weight:700;font-family:monospace;color:#4ca87c;min-width:28px">60s</span></span>
+        <button class="btn btn-o" id="mkb" style="padding:4px 10px;font-size:12px" onclick="togMk()">Mark</button>
+        <button class="btn btn-o" id="hdb" style="padding:4px 10px;font-size:12px;color:#c94c4c" onclick="togHd()">&#128293; Hard</button>
+      </div>
+    </div>
+    <div class="qb" id="qtxt"></div>
+    <div class="og" id="ogrid"></div>
+    <div id="sarea"></div>
+  </div>
+  <div style="display:flex;justify-content:center;margin-top:16px">
+    <button class="btn btn-g" style="padding:13px 36px;font-size:15px;font-weight:700" onclick="nextQ()">Next Question</button>
+  </div>
+</div>
+
+<!-- HARD ZONE -->
+<div id="sc-hardzone" class="sc">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+    <div><span style="color:#c94c4c;font-weight:700;font-size:17px;margin-right:8px">&#128293; Hard Zone</span><span id="hzctr" style="color:var(--tx3);font-size:13px"></span></div>
+    <button class="btn btn-o" onclick="goTo('practice')">&larr; Back</button>
+  </div>
+  <div id="hzcont"></div>
+</div>
+
+<!-- REVISION -->
+<div id="sc-revision" class="sc">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+    <h2 style="font-size:17px;color:var(--gold)">Revision Dashboard</h2>
+    <button class="btn btn-o" onclick="goTo('practice')">&larr; Back</button>
+  </div>
+  <div style="display:grid;gap:12px">
+    <div class="card" style="border-color:rgba(201,168,76,.4)">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div><div style="color:var(--gold);font-weight:600">Marked for Review</div><div id="rv-m" style="color:var(--tx3);font-size:13px;margin-top:4px">0 questions</div></div>
+        <button class="btn btn-o" style="font-size:12px" onclick="clrM()">Clear</button>
+      </div>
+    </div>
+    <div class="card" style="border-color:rgba(201,76,76,.4)">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div><div style="color:#c94c4c;font-weight:600">&#128293; Hard Zone</div><div id="rv-h" style="color:var(--tx3);font-size:13px;margin-top:4px">0 questions</div></div>
+        <button class="btn btn-o" style="font-size:12px" onclick="clrH()">Clear</button>
+      </div>
+    </div>
+    <div class="card">
+      <div style="font-weight:600;margin-bottom:12px;font-size:14px">Simplification Quick Reference</div>
+      <div id="simpref"></div>
+    </div>
+    <div class="card">
+      <div style="font-weight:600;margin-bottom:10px;font-size:14px">Fraction Family</div>
+      <div style="font-size:12px;color:var(--tx3);margin-bottom:6px">Base Fractions 1/n</div>
+      <div class="rg" id="fref"></div>
+      <div style="font-size:12px;color:var(--tx3);margin:10px 0 6px">Key Derived Fractions</div>
+      <div class="rg" id="dref"></div>
+    </div>
+    <div class="card">
+      <div style="font-weight:600;margin-bottom:10px;font-size:14px">Series Pattern Reference</div>
+      <div id="patref"></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+// ============================================================
+// STATE
+// ============================================================
+var G={mod:'simplification',lv:'prelims',mode:'practice',tpq:60,dark:true,q:null,answered:false,marked:false,hard:false,stats:{a:0,c:0,spds:[]},tmr:null,tl:60};
+var HQ=[],MQ=[];
+try{HQ=JSON.parse(localStorage.getItem('ibps_hq')||'[]');}catch(e){}
+try{MQ=JSON.parse(localStorage.getItem('ibps_mq')||'[]');}catch(e){}
+
+// ============================================================
+// UTILS
+// ============================================================
+function rand(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+function pick(arr){return arr[rand(0,arr.length-1)];}
+function r2(n){return Math.round(n*100)/100;}
+function r1(n){return Math.round(n*10)/10;}
+function fmt(n){return(n===Math.floor(n))?n:r2(n);}
+function shuffle(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=rand(0,i);var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function mkEl(tag,txt,cls,sty){var e=document.createElement(tag);if(txt)e.textContent=txt;if(cls)e.className=cls;if(sty)e.style.cssText=sty;return e;}
+
+function genOpts(ans,spread){
+  var s=spread||Math.max(Math.abs(ans)*0.12+4,8);
+  var pool=new Set([String(ans)]);
+  var tries=0;
+  while(pool.size<4&&tries<100){
+    var off=rand(1,Math.ceil(s))*(Math.random()>.5?1:-1);
+    var v=fmt(ans+off);
+    if(String(v)!==String(ans))pool.add(String(v));
+    tries++;
+  }
+  return shuffle(Array.from(pool));
+}
+
+// ============================================================
+// IBPS BASE TABLES - bases guaranteed divisible by denominator
+// ============================================================
+var BASES={
+  2:[360,480,576,640,720,840,960,1080,1200,1440,1600,1800,2000,2400,3000,3200,3600,4000,4500,5000],
+  3:[360,480,576,720,840,960,1080,1200,1440,1800,2400,2700,3000,3600,4500,5400],
+  4:[360,480,576,640,720,840,960,1080,1200,1440,1600,2000,2400,3200,4000,4800],
+  5:[360,480,640,720,840,960,1080,1200,1440,1600,2000,2400,3000,3200,4000,5000],
+  6:[360,480,576,720,840,960,1080,1200,1440,1800,2400,3000,3600,4500,5400],
+  7:[420,840,1120,1260,1400,1680,2100,2520,3360,4200],
+  8:[360,480,576,640,720,840,960,1080,1200,1440,1600,2400,3200,4000,4800],
+  9:[360,480,576,720,1080,1440,1800,2700,3600,4500,5400],
+  11:[1210,2420,3630,4840,6050],
+  12:[360,480,576,720,840,960,1080,1200,1440,2400,3600,4800],
+  13:[1040,1300,1690,2080,2600,3380]
+};
+
+// All valid fraction pairs (n/d, d from 2-13, n<d, gcd(n,d)=1)
+var FRACS=[
+  {n:1,d:2,pct:50},{n:1,d:3,pct:33.33},{n:2,d:3,pct:66.67},
+  {n:1,d:4,pct:25},{n:3,d:4,pct:75},
+  {n:1,d:5,pct:20},{n:2,d:5,pct:40},{n:3,d:5,pct:60},{n:4,d:5,pct:80},
+  {n:1,d:6,pct:16.67},{n:5,d:6,pct:83.33},
+  {n:1,d:7,pct:14.28},{n:2,d:7,pct:28.57},{n:3,d:7,pct:42.86},
+  {n:1,d:8,pct:12.5},{n:3,d:8,pct:37.5},{n:5,d:8,pct:62.5},{n:7,d:8,pct:87.5},
+  {n:1,d:9,pct:11.11},{n:2,d:9,pct:22.22},{n:4,d:9,pct:44.44},{n:5,d:9,pct:55.55},{n:7,d:9,pct:77.77},
+  {n:1,d:11,pct:9.09},{n:3,d:11,pct:27.27},{n:5,d:11,pct:45.45},
+  {n:1,d:12,pct:8.33},{n:5,d:12,pct:41.67},{n:7,d:12,pct:58.33},
+  {n:1,d:13,pct:7.69},{n:3,d:13,pct:23.08},{n:6,d:13,pct:46.15}
+];
+
+// Prelims fracs (simple denominators only)
+var FRACS_P=FRACS.filter(function(f){return f.d<=9;});
+
+function getBase(d){return pick(BASES[d]||BASES[2]);}
+function fracVal(f,base){return Math.round(base*f.n/f.d);}
+function getFrac(prelims){return prelims?pick(FRACS_P):pick(FRACS);}
+
+// Perfect squares for IBPS (up to 50)
+var SQ=[]; for(var _i=1;_i<=50;_i++)SQ.push({n:_i,sq:_i*_i});
+// Perfect cubes for IBPS (up to 30)
+var CU=[]; for(var _i=1;_i<=30;_i++)CU.push({n:_i,cu:_i*_i*_i});
+// Primes
+var PRIMES=[2,3,5,7,11,13,17,19,23,29,31,37,41,43,47];
+
+// ============================================================
+// SIMPLIFICATION GENERATOR - STRICTLY IBPS PATTERN
+// ============================================================
+// IBPS Simplification Types (from actual papers 2018-2024):
+// Type 1: n1/d1 of A + n2/d2 of B = ?   (fraction of exact-divisible numbers)
+// Type 2: n1/d1 of A - n2/d2 of B = ?
+// Type 3: A² + B*C - D^2 = ?           (BODMAS with squares)
+// Type 4: A/B + C^3 - √(D) = ?        (division + cube + sqrt)
+// Type 5: √(A*B) + C² - D = ?        (sqrt of product)
+// Type 6: n/d of A + B² - √(C) = ?   (mixed fraction + power)
+// Type 7: (A+B)² - (A-B)^2 = ?          (identity: =4AB, very common)
+// Type 8: (A+B)^2 + (A-B)^2 = ?          (identity: =2(A²+B²))
+// Type 9: A% of B + B% of A = ?           (identity: =2AB/100)
+// Type 10: n1/d1 of A + n2/d2 of B + C^2 = ? (3-part, Mains)
+// Type 11: A³ + B² - C*D = ?            (cube + sq + product)
+// Type 12: √(A) * B + C^3 - D = ?      (Mains)
+
+function genSimp(level){
+  var isPre=(level==='prelims');
+  var types=isPre?[1,1,1,2,2,3,3,4,5,6,7,8,9]:[1,2,3,4,5,6,7,8,9,10,11,12];
+  var type=pick(types);
+
+  if(type===1){
+    // n1/d1 of A + n2/d2 of B = ?
+    var f1=getFrac(isPre), f2=getFrac(isPre);
+    var b1=getBase(f1.d), b2=getBase(f2.d);
+    var a1=fracVal(f1,b1), a2=fracVal(f2,b2);
+    var ans=a1+a2;
+    return{
+      q:f1.n+'/'+f1.d+' of '+b1+' + '+f2.n+'/'+f2.d+' of '+b2+' = ?',
+      ans:ans, opts:genOpts(ans),
+      solution:[
+        f1.n+'/'+f1.d+' of '+b1+' = '+b1+' / '+f1.d+' x '+f1.n+' = '+a1,
+        f2.n+'/'+f2.d+' of '+b2+' = '+b2+' / '+f2.d+' x '+f2.n+' = '+a2,
+        a1+' + '+a2+' = '+ans,
+        'Trick: Divide base by denominator first, then multiply by numerator. Always faster.'
+      ],
+      type:'Simplification',topic:'Fractions (Type 1)'
+    };
+  }
+
+  if(type===2){
+    // n1/d1 of A - n2/d2 of B = ?
+    var f1=getFrac(isPre), f2=getFrac(isPre);
+    var b1=getBase(f1.d), b2=getBase(f2.d);
+    var a1=fracVal(f1,b1), a2=fracVal(f2,b2);
+    // Ensure positive answer
+    if(a1<a2){var tmp=a1;a1=a2;a2=tmp;var tmpf=f1;f1=f2;f2=tmpf;var tmpb=b1;b1=b2;b2=tmpb;}
+    var ans=a1-a2;
+    return{
+      q:f1.n+'/'+f1.d+' of '+b1+' - '+f2.n+'/'+f2.d+' of '+b2+' = ?',
+      ans:ans, opts:genOpts(ans),
+      solution:[
+        f1.n+'/'+f1.d+' of '+b1+' = '+b1+' / '+f1.d+' x '+f1.n+' = '+a1,
+        f2.n+'/'+f2.d+' of '+b2+' = '+b2+' / '+f2.d+' x '+f2.n+' = '+a2,
+        a1+' - '+a2+' = '+ans,
+        'Trick: Solve each fraction separately, then subtract.'
+      ],
+      type:'Simplification',topic:'Fractions (Type 2)'
+    };
+  }
+
+  if(type===3){
+    // A² + B*C - D^2 = ?  (BODMAS)
+    var sq1=pick(SQ.slice(5,25)), sq2=pick(SQ.slice(3,20));
+    var b=rand(3,15), c=rand(10,40);
+    var ans=fmt(sq1.sq + b*c - sq2.sq);
+    return{
+      q:sq1.n+'² + '+b+' x '+c+' - '+sq2.n+'² = ?',
+      ans:ans, opts:genOpts(ans),
+      solution:[
+        'BODMAS: Orders first  =>  '+sq1.n+'² = '+sq1.sq+',  '+sq2.n+'² = '+sq2.sq,
+        'Multiply  =>  '+b+' x '+c+' = '+b*c,
+        sq1.sq+' + '+b*c+' - '+sq2.sq+' = '+ans,
+        'Trick: Always solve powers first, then multiplication, then +/-'
+      ],
+      type:'Simplification',topic:'BODMAS Squares'
+    };
+  }
+
+  if(type===4){
+    // A/B + C^3 - √(D) = ?  (Exact integer division)
+    var divPairs=[[1440,24,60],[2160,36,60],[3600,45,80],[1728,27,64],[2025,25,81],[1296,18,72],[1764,28,63],[2520,35,72],[3375,45,75],[4096,64,64]];
+    var dp=pick(divPairs);
+    var cu=pick(CU.slice(2,12));
+    var sq=pick(SQ.slice(4,20));
+    var ans=fmt(dp[0]/dp[1]+cu.cu-sq.n);
+    return{
+      q:dp[0]+'/'+dp[1]+' + '+cu.n+'³ - √('+sq.sq+') = ?',
+      ans:ans, opts:genOpts(ans),
+      solution:[
+        dp[0]+' / '+dp[1]+' = '+dp[0]/dp[1],
+        cu.n+'³ = '+cu.cu,
+        '√('+sq.sq+') = '+sq.n+' (perfect square, memorise!)',
+        (dp[0]/dp[1])+' + '+cu.cu+' - '+sq.n+' = '+ans,
+        'Trick: Memorise perfect squares (1-50) and cubes (1-20) for speed.'
+      ],
+      type:'Simplification',topic:'Division + Cube + √'
+    };
+  }
+
+  if(type===5){
+    // √(A² * B) + C² - D   where B is perfect square
+    var a=pick([2,3,4,5,6,7,8,9,10,12,15]);
+    var b=pick(SQ.slice(1,10));
+    var product=a*a*b.sq;
+    var sqrtVal=a*b.n;
+    var sq2=pick(SQ.slice(3,15));
+    var d=rand(10,50);
+    var ans=sqrtVal+sq2.sq-d;
+    return{
+      q:'√('+product+') + '+sq2.n+'² - '+d+' = ?',
+      ans:ans, opts:genOpts(ans),
+      solution:[
+        '√('+product+') = √('+a*a+' x '+b.sq+') = '+a+' x '+b.n+' = '+sqrtVal,
+        sq2.n+'² = '+sq2.sq,
+        sqrtVal+' + '+sq2.sq+' - '+d+' = '+ans,
+        'Trick: Factor out under sqrt: '+product+' = '+a*a+' x '+b.sq+' = ('+a+'x'+b.n+')²'
+      ],
+      type:'Simplification',topic:'Sqrt of Product + Squares'
+    };
+  }
+
+  if(type===6){
+    // n/d of A + B² - √(C) = ?
+    var f=getFrac(isPre);
+    var base=getBase(f.d);
+    var fv=fracVal(f,base);
+    var sq=pick(SQ.slice(3,18));
+    var sqr=pick(SQ.slice(4,25));
+    var ans=fmt(fv+sq.sq-sqr.n);
+    return{
+      q:f.n+'/'+f.d+' of '+base+' + '+sq.n+'² - √('+sqr.sq+') = ?',
+      ans:ans, opts:genOpts(ans),
+      solution:[
+        f.n+'/'+f.d+' of '+base+' = '+base+'/'+f.d+' x '+f.n+' = '+fv,
+        sq.n+'² = '+sq.sq,
+        '√('+sqr.sq+') = '+sqr.n,
+        fv+' + '+sq.sq+' - '+sqr.n+' = '+ans,
+        'Trick: Solve fraction, then power, then √ (all separately), then combine.'
+      ],
+      type:'Simplification',topic:'Fraction + Power + Sqrt'
+    };
+  }
+
+  if(type===7){
+    // (A+B)² - (A-B)^2 = 4AB  (IBPS identity trick)
+    var a=rand(10,40), b=rand(5,25);
+    var lhs=Math.pow(a+b,2)-Math.pow(a-b,2);
+    var ans=lhs;
+    return{
+      q:'('+( a+b)+')² - ('+(Math.abs(a-b))+')² = ?',
+      ans:ans, opts:genOpts(ans,50),
+      solution:[
+        'Identity: (A+B)² - (A-B)² = 4AB',
+        'Here A = '+a+', B = '+b,
+        '4 x '+a+' x '+b+' = '+ans,
+        'Direct calculation: '+(a+b)+'² = '+(a+b)*(a+b)+',  '+(Math.abs(a-b))+'² = '+(a-b)*(a-b),
+        (a+b)*(a+b)+' - '+(a-b)*(a-b)+' = '+ans,
+        'Trick: Use identity 4AB for instant answer. Never expand manually!'
+      ],
+      type:'Simplification',topic:'Algebraic Identity (A+B)²-(A-B)²'
+    };
+  }
+
+  if(type===8){
+    // (A+B)^2 + (A-B)^2 = 2(A²+B²)  (IBPS identity)
+    var a=rand(8,35), b=rand(4,20);
+    var ans=2*(a*a+b*b);
+    return{
+      q:'('+( a+b)+')² + ('+(Math.abs(a-b))+')² = ?',
+      ans:ans, opts:genOpts(ans,50),
+      solution:[
+        'Identity: (A+B)² + (A-B)² = 2(A² + B²)',
+        'Here A = '+a+', B = '+b,
+        '2 x ('+a+'² + '+b+'²) = 2 x ('+a*a+' + '+b*b+') = 2 x '+(a*a+b*b)+' = '+ans,
+        'Direct: '+(a+b)+'² = '+(a+b)*(a+b)+',  '+(Math.abs(a-b))+'² = '+(a-b)*(a-b),
+        (a+b)*(a+b)+' + '+(a-b)*(a-b)+' = '+ans,
+        'Trick: Use identity 2(A²+B²) for instant answer!'
+      ],
+      type:'Simplification',topic:'Algebraic Identity (A+B)²+(A-B)²'
+    };
+  }
+
+  if(type===9){
+    // A% of B + B% of A = 2AB/100  (classic IBPS trap)
+    var a=rand(15,80), b=rand(20,90);
+    var ans=r2(2*a*b/100);
+    return{
+      q:a+'% of '+b+' + '+b+'% of '+a+' = ?',
+      ans:ans, opts:genOpts(ans,5),
+      solution:[
+        a+'% of '+b+' = '+r2(a*b/100),
+        b+'% of '+a+' = '+r2(b*a/100),
+        'Note: '+a+'% of '+b+' = '+b+'% of '+a+' = AB/100',
+        'So '+a+'% of '+b+' + '+b+'% of '+a+' = 2 x AB/100 = 2 x '+a+' x '+b+' / 100 = '+ans,
+        'Trick: A% of B = B% of A always! So sum = 2AB/100. Instant answer.'
+      ],
+      type:'Simplification',topic:'Symmetric Percentage Trick'
+    };
+  }
+
+  if(type===10){
+    // 3-part: n1/d1 of A + n2/d2 of B + C^2 = ? (Mains)
+    var f1=getFrac(false), f2=getFrac(false);
+    var b1=getBase(f1.d), b2=getBase(f2.d);
+    var a1=fracVal(f1,b1), a2=fracVal(f2,b2);
+    var sq=pick(SQ.slice(3,18));
+    var ans=a1+a2+sq.sq;
+    return{
+      q:f1.n+'/'+f1.d+' of '+b1+' + '+f2.n+'/'+f2.d+' of '+b2+' + '+sq.n+'² = ?',
+      ans:ans, opts:genOpts(ans),
+      solution:[
+        f1.n+'/'+f1.d+' of '+b1+' = '+a1,
+        f2.n+'/'+f2.d+' of '+b2+' = '+a2,
+        sq.n+'² = '+sq.sq,
+        a1+' + '+a2+' + '+sq.sq+' = '+ans,
+        'Trick: Solve each part independently, then add.'
+      ],
+      type:'Simplification',topic:'3-Part Mixed (Mains)'
+    };
+  }
+
+  if(type===11){
+    // A³ + B² - C*D = ?
+    var cu=pick(CU.slice(2,10));
+    var sq=pick(SQ.slice(5,22));
+    var c=rand(8,20), d=rand(8,20);
+    var ans=fmt(cu.cu+sq.sq-c*d);
+    return{
+      q:cu.n+'³ + '+sq.n+'² - '+c+' x '+d+' = ?',
+      ans:ans, opts:genOpts(ans),
+      solution:[
+        cu.n+'³ = '+cu.cu,
+        sq.n+'² = '+sq.sq,
+        c+' x '+d+' = '+c*d,
+        cu.cu+' + '+sq.sq+' - '+c*d+' = '+ans,
+        'BODMAS: Cube and square (Orders) first, then multiply, then add/subtract.'
+      ],
+      type:'Simplification',topic:'Cube + Square + Product (Mains)'
+    };
+  }
+
+  // Type 12: n/d of A + √(B*C) - D^3  (Mains complex)
+  var f=getFrac(false);
+  var base=getBase(f.d);
+  var fv=fracVal(f,base);
+  var a2=pick([2,3,4,5,6,7,8]), b2=pick(SQ.slice(1,8));
+  var sqrtVal2=a2*b2.n;
+  var cu2=pick(CU.slice(1,8));
+  var ans=fv+sqrtVal2-cu2.cu;
+  return{
+    q:f.n+'/'+f.d+' of '+base+' + √('+a2*a2*b2.sq+') - '+cu2.n+'³ = ?',
+    ans:ans, opts:genOpts(ans),
+    solution:[
+      f.n+'/'+f.d+' of '+base+' = '+fv,
+      '√('+a2*a2*b2.sq+') = √('+a2*a2+' x '+b2.sq+') = '+a2+' x '+b2.n+' = '+sqrtVal2,
+      cu2.n+'³ = '+cu2.cu,
+      fv+' + '+sqrtVal2+' - '+cu2.cu+' = '+ans,
+      'Trick: Factor product under √ . Memorise cubes 1-15.'
+    ],
+    type:'Simplification',topic:'Fraction + Sqrt + Cube (Mains)'
+  };
+}
+
+// ============================================================
+// APPROXIMATION GENERATOR - STRICTLY IBPS PATTERN
+// ============================================================
+// IBPS Approximation: values are deliberately messy decimals
+// Options are spaced 5-25 apart. Answer within 2-3% of exact.
+// Rule: Round to nearest "friendly" number, compute, check options.
+//
+// Types from actual IBPS PO/Clerk, SBI PO papers:
+// Type 1: √(X.YZ) ~ ?           (messy non-perfect square)
+// Type 2: (X.YZ)^2 ~ ?             (messy decimal squared)
+// Type 3: P.QR% of X.YZ ~ ?        (messy % of messy number)
+// Type 4: X.YZ / P.QR ~ ?          (messy division)
+// Type 5: X.YZ * P.QR ~ ?          (messy multiplication)
+// Type 6: A% of X + B% of Y ~ ?    (double percentage - common Mains)
+// Type 7: √(X) + Y.ZW * P ~ ?   (compound - Mains)
+// Type 8: (X.YZ)² - √(P.QR) ~ ? (compound - Mains)
+// Type 9: X.YZ% of A - B% of C.DE ~ ? (compound subtraction)
+
+// Approximation: base must be close to "round" number but messy looking
+function messyVal(base,maxNoise){
+  var noise=rand(2,maxNoise||15)*(Math.random()>.5?1:-1);
+  // Add decimal for realism (like IBPS: 449.87, 143.03)
+  var dec=rand(1,99)*0.01*(Math.random()>.5?1:-1);
+  return r2(base+noise+dec);
+}
+
+function genApprox(level){
+  var isPre=(level==='prelims');
+  var types=isPre?[1,1,1,2,2,3,3,3,4,4,5]:[1,2,3,3,4,5,6,6,7,8,9];
+  var type=pick(types);
+
+  if(type===1){
+    // √(X.YZ) ~ ?  Classic IBPS - value near perfect square with decimal
+    var sq=pick(SQ.slice(4,28));
+    var noise=rand(2,Math.floor(sq.n*0.8)+2)*(Math.random()>.5?1:-1);
+    var dec=rand(1,97)*0.01*(Math.random()>.5?1:-1);
+    var val=r2(sq.sq+noise+dec);
+    if(val<1)val=sq.sq+2.07;
+    var ans=sq.n;
+    // Options: ans-2, ans-1, ans, ans+1, ans+2 (IBPS style close options)
+    var rawOpts=[ans-2,ans-1,ans,ans+1,ans+2];
+    rawOpts=rawOpts.filter(function(x){return x>0;});
+    var opts=shuffle(rawOpts).slice(0,4);
+    if(opts.indexOf(ans)===-1)opts[0]=ans;
+    return{
+      q:'√('+val+') ~ ?',
+      ans:ans, opts:shuffle(opts),
+      solution:[
+        'Nearest perfect square to '+val+' is '+sq.sq+' (= '+sq.n+'²)',
+        '√('+sq.sq+') = '+sq.n,
+        'Difference: |'+val+' - '+sq.sq+'| is small, so √('+val+') ~ '+sq.n,
+        'IBPS Rule: Always identify nearest perfect square. Options will confirm.'
+      ],
+      type:'Approximation',topic:'√(X.YZ)'
+    };
+  }
+
+  if(type===2){
+    // (X.YZ)^2 ~ ?
+    var a=rand(8,40);
+    var noise=rand(1,Math.floor(a*0.12)+1)*(Math.random()>.5?1:-1);
+    var dec=rand(2,95)*0.01*(Math.random()>.5?1:-1);
+    var val=r2(a+noise*0.1+dec);
+    // Round val to nearest integer for calc
+    var rounded=Math.round(val);
+    var ans=rounded*rounded;
+    var spread=Math.max(ans*0.1,20);
+    return{
+      q:'('+val+')² ~ ?',
+      ans:ans, opts:genOpts(ans,spread),
+      solution:[
+        'Round '+val+' to nearest integer: '+rounded,
+        rounded+'² = '+ans,
+        'Exact = '+r2(val*val)+'. Diff from options is small.',
+        'IBPS Rule: Round to nearest integer, then square. Verify with options gap.'
+      ],
+      type:'Approximation',topic:'(X.YZ)²'
+    };
+  }
+
+  if(type===3){
+    // P% of X.YZ ~ ?  (messy percentage of messy number)
+    var f=pick(isPre?FRACS_P:FRACS);
+    var base=getBase(f.d);
+    var noise=rand(3,20)*(Math.random()>.5?1:-1);
+    var dec=rand(1,97)*0.01*(Math.random()>.5?1:-1);
+    var val=r2(base+noise+dec);
+    var ans=fracVal(f,base); // use clean base for answer
+    var spread=Math.max(ans*0.1,10);
+    var pctLabel=f.pct+'%';
+    return{
+      q:pctLabel+' of '+val+' ~ ?',
+      ans:ans, opts:genOpts(ans,spread),
+      solution:[
+        'Round '+val+' to '+base+' (nearest multiple of '+f.d+')',
+        f.pct+'% = '+f.n+'/'+f.d,
+        f.n+'/'+f.d+' x '+base+' = '+base+'/'+f.d+' x '+f.n+' = '+ans,
+        'Exact = '+r2(val*f.n/f.d)+'. Acceptable for approximation.',
+        'IBPS Rule: Round base to nearest multiple of denominator, then compute fraction.'
+      ],
+      type:'Approximation',topic:'P% of X.YZ'
+    };
+  }
+
+  if(type===4){
+    // X.YZ / P.QR ~ ?  (messy division)
+    var a=rand(150,900);
+    var b=rand(7,25);
+    var noiseA=rand(2,15)*(Math.random()>.5?1:-1);
+    var noiseB=rand(1,4)*(Math.random()>.5?1:-1);
+    var decA=rand(2,95)*0.01*(Math.random()>.5?1:-1);
+    var decB=rand(2,95)*0.01*(Math.random()>.5?1:-1);
+    var valA=r2(a+noiseA+decA);
+    var valB=r2(b+noiseB*0.1+decB);
+    var ans=Math.round(a/b);
+    return{
+      q:valA+' / '+valB+' ~ ?',
+      ans:ans, opts:genOpts(ans,Math.max(ans*0.15,4)),
+      solution:[
+        'Round: '+valA+' ~ '+a+',  '+valB+' ~ '+b,
+        a+' / '+b+' = '+ans+' (remainder '+a%b+')',
+        'Exact = '+r2(valA/valB)+'. Close enough.',
+        'IBPS Rule: Round both numbers to nearest integers, then divide.'
+      ],
+      type:'Approximation',topic:'X.YZ / P.QR'
+    };
+  }
+
+  if(type===5){
+    // X.YZ * P.QR ~ ?  (messy multiplication)
+    var a=rand(15,80);
+    var b=rand(8,35);
+    var decA=rand(2,97)*0.01*(Math.random()>.5?1:-1);
+    var decB=rand(2,97)*0.01*(Math.random()>.5?1:-1);
+    var valA=r2(a+decA);
+    var valB=r2(b+decB);
+    var ans=a*b;
+    return{
+      q:valA+' x '+valB+' ~ ?',
+      ans:ans, opts:genOpts(ans,Math.max(ans*0.12,15)),
+      solution:[
+        'Round: '+valA+' ~ '+a+',  '+valB+' ~ '+b,
+        a+' x '+b+' = '+ans,
+        'Exact = '+r2(valA*valB)+'. Diff within option gap.',
+        'IBPS Rule: Round both to nearest integers, multiply.'
+      ],
+      type:'Approximation',topic:'X.YZ x P.QR'
+    };
+  }
+
+  if(type===6){
+    // A% of X + B% of Y ~ ?  (Double percentage - frequent Mains)
+    var f1=pick(FRACS_P), f2=pick(FRACS_P.filter(function(f){return f.d!==f1.d;}));
+    var base1=getBase(f1.d), base2=getBase(f2.d);
+    var noise1=rand(3,18)*(Math.random()>.5?1:-1), noise2=rand(3,18)*(Math.random()>.5?1:-1);
+    var dec1=rand(2,97)*0.01, dec2=rand(2,97)*0.01;
+    var val1=r2(base1+noise1+dec1), val2=r2(base2+noise2+dec2);
+    var a1=fracVal(f1,base1), a2=fracVal(f2,base2);
+    var ans=a1+a2;
+    return{
+      q:f1.pct+'% of '+val1+' + '+f2.pct+'% of '+val2+' ~ ?',
+      ans:ans, opts:genOpts(ans,Math.max(ans*0.1,20)),
+      solution:[
+        'Round: '+val1+' ~ '+base1+',  '+val2+' ~ '+base2,
+        f1.pct+'% of '+base1+' = '+f1.n+'/'+f1.d+' x '+base1+' = '+a1,
+        f2.pct+'% of '+base2+' = '+f2.n+'/'+f2.d+' x '+base2+' = '+a2,
+        a1+' + '+a2+' = '+ans,
+        'IBPS Rule: Round each base to nearest multiple of its denominator.'
+      ],
+      type:'Approximation',topic:'A% of X + B% of Y (Mains)'
+    };
+  }
+
+  if(type===7){
+    // √(X) + Y.ZW * P ~ ?  (Mains compound)
+    var sq=pick(SQ.slice(4,20));
+    var noise1=rand(2,12)*(Math.random()>.5?1:-1);
+    var dec1=rand(2,95)*0.01*(Math.random()>.5?1:-1);
+    var sqVal=r2(sq.sq+noise1+dec1);
+    var y=rand(8,40);
+    var decY=rand(2,95)*0.01*(Math.random()>.5?1:-1);
+    var yVal=r2(y+decY);
+    var p=rand(3,15);
+    var ans=sq.n+y*p;
+    return{
+      q:'√('+sqVal+') + '+yVal+' x '+p+' ~ ?',
+      ans:ans, opts:genOpts(ans,Math.max(ans*0.1,15)),
+      solution:[
+        '√('+sqVal+') ~ √('+sq.sq+') = '+sq.n,
+        yVal+' ~ '+y,
+        y+' x '+p+' = '+y*p,
+        sq.n+' + '+y*p+' = '+ans,
+        'IBPS Rule: Round sqrt to nearest perfect square; round multiplier to integer.'
+      ],
+      type:'Approximation',topic:'√(X) + Y x P (Mains)'
+    };
+  }
+
+  if(type===8){
+    // (X.YZ)² - √(P.QR) ~ ?  (Mains compound)
+    var a=rand(10,30);
+    var decA=rand(2,95)*0.01*(Math.random()>.5?1:-1);
+    var valA=r2(a+decA);
+    var sq=pick(SQ.slice(3,20));
+    var noise2=rand(2,10)*(Math.random()>.5?1:-1);
+    var dec2=rand(2,95)*0.01*(Math.random()>.5?1:-1);
+    var sqVal=r2(sq.sq+noise2+dec2);
+    var ans=a*a-sq.n;
+    return{
+      q:'('+valA+')² - √('+sqVal+') ~ ?',
+      ans:ans, opts:genOpts(ans,Math.max(ans*0.1,15)),
+      solution:[
+        valA+' ~ '+a+',  so ('+valA+')² ~ '+a+'² = '+a*a,
+        '√('+sqVal+') ~ √('+sq.sq+') = '+sq.n,
+        a*a+' - '+sq.n+' = '+ans,
+        'IBPS Rule: Round separately, then combine.'
+      ],
+      type:'Approximation',topic:'(X.YZ)² - √(P.QR) (Mains)'
+    };
+  }
+
+  // Type 9: A% of X - B% of Y ~ ?  (Mains subtraction)
+  var f1=pick(FRACS_P), f2=pick(FRACS_P);
+  var base1=getBase(f1.d), base2=getBase(f2.d);
+  // Ensure positive result
+  var a1=fracVal(f1,base1), a2=fracVal(f2,base2);
+  if(a1<a2){var tmp=a1;a1=a2;a2=tmp;var tmpf=f1;f1=f2;f2=tmpf;var tmpb=base1;base1=base2;base2=tmpb;}
+  var noise1=rand(3,18)*(Math.random()>.5?1:-1), noise2=rand(3,15)*(Math.random()>.5?1:-1);
+  var val1=r2(base1+noise1+rand(2,97)*0.01), val2=r2(base2+noise2+rand(2,97)*0.01);
+  a1=fracVal(f1,base1); a2=fracVal(f2,base2);
+  if(a1<=a2){a1=fracVal(f1,getBase(f1.d)*2); base1=base1*2 <= 5000 ? base1*2 : base1; a1=fracVal(f1,base1); val1=r2(base1+noise1);}
+  var ans=a1-a2;
+  if(ans<0)ans=Math.abs(ans);
+  return{
+    q:f1.pct+'% of '+val1+' - '+f2.pct+'% of '+val2+' ~ ?',
+    ans:ans, opts:genOpts(ans,Math.max(ans*0.1,15)),
+    solution:[
+      'Round: '+val1+' ~ '+base1+',  '+val2+' ~ '+base2,
+      f1.pct+'% of '+base1+' = '+fracVal(f1,base1),
+      f2.pct+'% of '+base2+' = '+fracVal(f2,base2),
+      fracVal(f1,base1)+' - '+fracVal(f2,base2)+' = '+ans,
+      'IBPS Rule: Round first, then compute, then subtract.'
+    ],
+    type:'Approximation',topic:'A% of X - B% of Y (Mains)'
+  };
+}
+
+// ============================================================
+// IBPS SERIES PATTERNS (18 patterns - unchanged from v3)
+// ============================================================
+var PRIMES2=[2,3,5,7,11,13,17,19,23,29,31,37,41,43,47];
+var SQ2=[],CU2=[];
+for(var _n=1;_n<=50;_n++)SQ2.push({n:_n,sq:_n*_n});
+for(var _n=1;_n<=30;_n++)CU2.push({n:_n,cu:_n*_n*_n});
+
+var IBPS_PAT=[
+  function(){var s=rand(3,80),d=pick([3,4,5,6,7,8,9,11,12,13,15,18,20,22,25]),t=[];for(var i=0;i<7;i++)t.push(s+d*i);return{terms:t,pn:'AP - Arithmetic Progression',rd:'Each term +'+d+' (constant difference)',st:'Check: T2-T1 = T3-T2 = ... = '+d};},
+  function(){var s=rand(2,30),d1=rand(2,10),d2=pick([2,3,4,5,6]),ds=[],t=[s];for(var i=0;i<6;i++){ds.push(d1+d2*i);t.push(t[t.length-1]+ds[ds.length-1]);}return{terms:t,pn:'Double Difference (2nd Order AP)',rd:'1st diffs: '+ds.slice(0,4).join(',')+' (increasing by '+d2+')',st:'Find diffs, then diffs of diffs = '+d2+' (constant)'};},
+  function(){var cs=[[2,2],[2,3],[2,4],[3,2],[3,3],[4,2],[5,2],[6,2]],c=pick(cs),s=c[0],r=c[1],t=[s];for(var i=0;i<6;i++)t.push(t[t.length-1]*r);var ds=[];for(var i=1;i<t.length;i++)ds.push(t[i]-t[i-1]);return{terms:t,pn:'GP - Geometric Progression (x'+r+')',rd:'Each term x '+r,st:'Check ratio: T2/T1 = T3/T2 = '+r};},
+  function(){var cs=[[1,2,1],[1,2,2],[1,2,3],[1,2,-1],[1,2,-2],[1,3,1],[1,3,2],[1,3,-1],[1,3,-2],[2,2,1],[2,2,3],[2,2,-1],[3,2,2],[3,2,-3],[4,2,1]],c=pick(cs),s=c[0],mul=c[1],add=c[2],t=[s];for(var i=0;i<6;i++)t.push(t[t.length-1]*mul+add);return{terms:t,pn:'xR+C (x'+mul+(add>=0?'+':'')+add+')',rd:'Each term: prev x'+mul+(add>=0?' + ':' - ')+Math.abs(add),st:'Differences are in GP with ratio '+mul};},
+  function(){var s=rand(1,8),add=pick([-3,-2,-1,0,1,2,3,4,5]),t=[];for(var i=0;i<7;i++)t.push((s+i)*(s+i)+add);var ds=[];for(var i=1;i<t.length;i++)ds.push(t[i]-t[i-1]);var addStr=add===0?'':(add>0?' + '+add:' - '+Math.abs(add));return{terms:t,pn:'n²'+addStr+' Pattern',rd:'Terms = '+s+'², '+(s+1)+'², '+(s+2)+'²...'+addStr,st:'1st diffs: '+ds.slice(0,3).join(', ')+' (odd nums, each +2)'};},
+  function(){var pm=pick([1,-1]),t=[];for(var i=1;i<=7;i++)t.push(i*i+pm*i);var ds=[];for(var i=1;i<t.length;i++)ds.push(t[i]-t[i-1]);return{terms:t,pn:'n² '+(pm>0?'+':'-')+' n Pattern',rd:'T(n) = n² '+(pm>0?'+':'-')+' n, n=1,2,3...',st:'1st diffs: '+ds.slice(0,4).join(',')+' (each +2)'};},
+  function(){var s=rand(1,5),add=pick([-2,-1,0,1,2,3]),t=[];for(var i=0;i<7;i++)t.push(Math.pow(s+i,3)+add);var ds=[];for(var i=1;i<t.length;i++)ds.push(t[i]-t[i-1]);var addStr=add===0?'':(add>0?' + '+add:' - '+Math.abs(add));return{terms:t,pn:'n³'+addStr+' Pattern',rd:'Terms = '+s+'³, '+(s+1)+'³...'+addStr,st:'Spot cubes: 1,8,27,64,125,216,343...'};},
+  function(){var s=rand(10,100),t=[s];for(var i=0;i<6;i++)t.push(t[t.length-1]+PRIMES2[i]);return{terms:t,pn:'Prime Differences',rd:'Diffs = 2,3,5,7,11,13 (consecutive primes)',st:'Memorise primes: 2,3,5,7,11,13,17,19,23,29...'};},
+  function(){var a=rand(1,15),b=rand(a+2,25),t=[a,b];for(var i=0;i<5;i++)t.push(t[t.length-1]+t[t.length-2]);return{terms:t,pn:'Fibonacci-type Series',rd:'T(n) = T(n-1) + T(n-2)',st:'Check T3: if T3 = T1+T2, Fibonacci-type'};},
+  function(){var a1=rand(5,30),da=pick([3,4,5,6,7,8,9,10,11,12]),b1=rand(200,500),db=pick([-20,-18,-15,-14,-12,-11,-10,-9,-8,-7,-6]),t=[a1,b1,a1+da,b1+db,a1+2*da,b1+2*db,a1+3*da];return{terms:t,pn:'Alternating Two Series',rd:'Odd pos: +'+da+'. Even pos: '+db,st:'Separate odd and even position terms into 2 series'};},
+  function(){var s=rand(2,10),r=pick([2,3]),add=pick([3,4,5,6,7,8,10]),t=[s];for(var i=0;i<6;i++)t.push(i%2===0?t[t.length-1]*r+add:t[t.length-1]*r-add);return{terms:t,pn:'x'+r+('+'+add+'/'+'-'+add)+' Alternating',rd:'Odd steps: x'+r+'+'+add+'. Even steps: x'+r+'-'+add,st:'Check alternate terms follow different xR rule'};},
+  function(){var s=rand(5,50),d=rand(3,10),inc=pick([3,4,5,6,7,8]),t=[s],ds=[];for(var i=0;i<6;i++){var diff=d+inc*i;ds.push(diff);t.push(t[t.length-1]+diff);}return{terms:t,pn:'Increasing Difference (+'+inc+'/step)',rd:'Diffs: '+ds.slice(0,4).join(',')+' (each +'+inc+')',st:'2nd differences all = '+inc+' (constant)'};},
+  function(){var s=rand(2,50),t=[s],ds=[];for(var i=1;i<=6;i++){ds.push(i*i);t.push(t[t.length-1]+i*i);}return{terms:t,pn:'Add Consecutive Squares (1,4,9,16...)',rd:'Diffs = 1,4,9,16,25,36 (1²,2²,3²...)',st:'Diffs are perfect squares in order'};},
+  function(){var s=rand(2,30),t=[s],ds=[];for(var i=1;i<=6;i++){ds.push(i*i*i);t.push(t[t.length-1]+i*i*i);}return{terms:t,pn:'Add Consecutive Cubes (1,8,27,64...)',rd:'Diffs = 1,8,27,64,125,216 (1³,2³,3³...)',st:'Diffs are perfect cubes in order'};},
+  function(){var s=rand(1,5),t=[s];for(var i=2;i<=7;i++)t.push(t[t.length-1]*i);return{terms:t,pn:'Incrementing Multiplier (x2,x3,x4...)',rd:'Ratios: x2,x3,x4,x5,x6,x7',st:'T2/T1=2, T3/T2=3, T4/T3=4 - ratios +1 each step'};},
+  function(){var s=rand(1,6),pm=pick([1,-1]),t=[];for(var i=0;i<7;i++)t.push((s+i)*(s+i)+pm*PRIMES2[i]);return{terms:t,pn:'n² '+(pm>0?'+':'-')+' prime Pattern',rd:'T(i)=('+s+'+i)² '+(pm>0?'+':'-')+' prime',st:'Subtract consecutive squares; remainders are '+(pm>0?'':'negative ')+'primes'};},
+  function(){var s=rand(1,8),r=pick([2,3]),as=pick([1,2,3,4,5]),ai=pick([1,2]),t=[s];for(var i=0;i<6;i++)t.push(r2(t[t.length-1]*r+as+ai*i));return{terms:t,pn:'xR + Incrementing Constant',rd:'x'+r+'+'+(as)+', x'+r+'+'+(as+ai)+', x'+r+'+'+(as+2*ai)+'... (+'+ai+' each time)',st:'Divide out multiplier; remainders form AP'};},
+  function(){var t=[];for(var i=1;i<=7;i++)t.push(i*i+i+1);var ds=[];for(var i=1;i<t.length;i++)ds.push(t[i]-t[i-1]);return{terms:t,pn:'n² + n + 1 Pattern',rd:'T(n) = n² + n + 1, n=1,2,...',st:'Diffs: '+ds.slice(0,4).join(',')+' (each +2)'};}
+];
+
+var PRE_POOL=[0,1,2,3,4,7,8,9,11,12,13,14];
+var MAIN_POOL=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17];
+
+function getPattern(lv){var pool=lv==='mains'?MAIN_POOL:PRE_POOL;return IBPS_PAT[pick(pool)]();}
+
+function genMissing(lv){
+  var p=getPattern(lv);
+  var idx=pick([1,2,3,4,5]);
+  var ans=fmt(p.terms[idx]);
+  var disp=p.terms.slice(0,7).map(function(v,i){return i===idx?'  ?  ':'  '+fmt(v)+'  ';});
+  var spread=Math.max(Math.abs(p.terms[idx])*0.15,5);
+  var opts=genOpts(p.terms[idx],spread).map(fmt);
+  if(opts.indexOf(ans)===-1)opts[0]=ans;
+  var diffs=[];for(var i=1;i<p.terms.length;i++)diffs.push(fmt(r2(p.terms[i]-p.terms[i-1])));
+  return{
+    q:disp.join(','),fullSeries:p.terms.map(fmt),ans:ans,opts:shuffle(opts),hideIdx:idx,
+    solution:['Pattern: '+p.pn,'Rule: '+p.rd,'Full series: '+p.terms.map(fmt).join(' , '),'Differences: '+diffs.join(' , '),'Position '+(idx+1)+' (missing) = '+ans,'Trick: '+p.st],
+    type:'Missing Number',topic:p.pn,patternName:p.pn
+  };
+}
+
+function wrongVal(p,idx,correct){
+  var strats=[];
+  [-1,1,-2,2,-3,3,-4,4,-5,5].forEach(function(e){var v=correct+e;if(v>0&&v!==correct)strats.push(v);});
+  if(idx>=2){var pd=p.terms[idx-1]-p.terms[idx-2];var wv=p.terms[idx-1]+pd;if(wv!==correct&&wv>0)strats.push(wv);}
+  var sr=Math.round(Math.sqrt(Math.abs(correct)));
+  if(sr*sr===Math.abs(correct)){strats.push((sr+1)*(sr+1));if(sr>1)strats.push((sr-1)*(sr-1));}
+  strats=strats.filter(function(v){return v>0&&v!==correct&&Math.abs(v-correct)<Math.abs(correct)*0.4+10;});
+  return strats.length?pick(strats):correct+pick([2,-2,3,-3,5,-5]);
+}
+
+function genWrong(lv){
+  var p=getPattern(lv);
+  var idx=pick([1,2,3,4,5]);
+  var correct=p.terms[idx];
+  var wrong=wrongVal(p,idx,correct);
+  var disp=p.terms.slice();disp[idx]=wrong;
+  var others=shuffle(p.terms.filter(function(_,i){return i!==idx;})).slice(0,3);
+  var opts=shuffle([fmt(wrong)].concat(others.map(fmt)));
+  var diffs=[];for(var i=1;i<p.terms.length;i++)diffs.push(fmt(r2(p.terms[i]-p.terms[i-1])));
+  return{
+    q:disp.map(fmt).join('  ,  '),fullSeries:p.terms.map(fmt),ans:fmt(wrong),wrongVal:fmt(wrong),correctVal:fmt(correct),wrongIdx:idx,opts:opts,
+    solution:['Pattern: '+p.pn,'Rule: '+p.rd,'Correct series: '+p.terms.map(fmt).join(' , '),'Correct diffs: '+diffs.join(' , '),'Wrong number: '+fmt(wrong)+' at position '+(idx+1),'Should be: '+fmt(correct),'Trick: '+p.st],
+    type:'Wrong Number',topic:p.pn,patternName:p.pn
+  };
+}
+
+function genQ(){
+  if(G.mod==='simplification')return genSimp(G.lv);
+  if(G.mod==='approximation')return genApprox(G.lv);
+  if(G.mod==='missing')return genMissing(G.lv);
+  if(G.mod==='wrong')return genWrong(G.lv);
+  return genSimp(G.lv);
+}
+
+// ============================================================
+// TIMER
+// ============================================================
+function startTmr(){clearInterval(G.tmr);G.tl=G.tpq;updTmr();G.tmr=setInterval(function(){G.tl--;updTmr();if(G.tl<=0){clearInterval(G.tmr);onTimeUp();}},1000);}
+function stopTmr(){clearInterval(G.tmr);}
+function updTmr(){var pct=G.tl/G.tpq;var col=pct>.5?'#4ca87c':pct>.25?'#c9a84c':'#c94c4c';var f=document.getElementById('tfill'),t=document.getElementById('ttxt');if(f){f.style.width=(pct*100)+'%';f.style.background=col;}if(t){t.textContent=G.tl+'s';t.style.color=col;}}
+function onTimeUp(){if(!G.answered){saveHard(G.q);revealAll();recStats(false,G.tpq);}}
+
+// ============================================================
+// QUESTION DISPLAY
+// ============================================================
+function loadQ(){
+  G.q=genQ();G.answered=false;G.marked=false;G.hard=false;
+  var tags=document.getElementById('qtags');
+  tags.innerHTML='';
+  tags.appendChild(mkEl('span',G.q.type,'tag','background:rgba(201,168,76,.15);color:var(--gold)'));
+  tags.appendChild(mkEl('span',G.q.topic,'tag','background:var(--bg4);color:var(--tx3);font-size:11px;margin-left:6px'));
+  if(G.q.patternName){var br=document.createElement('br');tags.appendChild(br);tags.appendChild(mkEl('span','Pattern: '+G.q.patternName,'pb',''));}
+  document.getElementById('qtxt').textContent=G.q.q;
+  document.getElementById('sarea').innerHTML='';
+  var mb=document.getElementById('mkb'),hb=document.getElementById('hdb');
+  mb.textContent='Mark';mb.style.color='';mb.style.borderColor='';
+  hb.textContent='Hard';hb.style.color='#c94c4c';
+  var grid=document.getElementById('ogrid');grid.innerHTML='';
+  G.q.opts.forEach(function(opt,i){
+    var btn=document.createElement('button');btn.className='ob';btn.setAttribute('data-opt',String(opt));
+    var lbl=mkEl('span',String.fromCharCode(65+i)+'.','','color:var(--tx3);margin-right:8px');
+    btn.appendChild(lbl);btn.appendChild(document.createTextNode(String(opt)));
+    btn.onclick=(function(o,b){return function(){selAns(o,b);};})(opt,btn);
+    grid.appendChild(btn);
+  });
+  var qc=document.getElementById('qcard');qc.className='card';void qc.offsetWidth;qc.className='card fi';
+  if(G.mode==='timed'){document.getElementById('twrap').style.display='flex';startTmr();}
+  else document.getElementById('twrap').style.display='none';
+}
+
+function selAns(opt,btn){
+  if(G.answered)return;G.answered=true;stopTmr();
+  var ts=G.tpq-G.tl,correct=String(opt)===String(G.q.ans);
+  recStats(correct,ts);
+  document.getElementById('ogrid').querySelectorAll('.ob').forEach(function(b){
+    var bo=b.getAttribute('data-opt');
+    if(String(bo)===String(G.q.ans))b.className='ob cor';
+    else if(b===btn&&!correct)b.className='ob wrg';
+    else b.className='ob dim';
+    b.onclick=null;
+  });
+  if(!correct){var qc=document.getElementById('qcard');qc.classList.add('sk');setTimeout(function(){qc.classList.remove('sk');},350);saveHard(G.q);}
+  showSol();
+}
+
+function revealAll(){
+  G.answered=true;
+  document.getElementById('ogrid').querySelectorAll('.ob').forEach(function(b){
+    var bo=b.getAttribute('data-opt');
+    if(String(bo)===String(G.q.ans))b.className='ob cor';else b.className='ob dim';b.onclick=null;
+  });showSol();
+}
+
+function showSol(){
+  var area=document.getElementById('sarea');
+  var wrap=document.createElement('div');wrap.className='sb';
+  wrap.appendChild(mkEl('div','Step-by-Step Solution','','font-weight:600;color:#4ca87c;margin-bottom:10px;font-size:14px'));
+
+  // Series: show visual series + diffs
+  if(G.q.type==='Missing Number'||G.q.type==='Wrong Number'){
+    var fs=G.q.fullSeries||[];
+    if(fs.length){
+      var row=document.createElement('div');row.style.cssText='display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px';
+      fs.forEach(function(v,i){
+        var isKey=(G.q.type==='Wrong Number'&&i===G.q.wrongIdx)||(G.q.type==='Missing Number'&&i===G.q.hideIdx);
+        row.appendChild(mkEl('div',String(v),'chip'+(isKey?' hi':''),''));
+      });
+      wrap.appendChild(mkEl('div','Correct series:','','font-size:12px;color:var(--tx3);margin-bottom:4px'));
+      wrap.appendChild(row);
+      // Diffs row
+      var drow=document.createElement('div');drow.style.cssText='display:flex;gap:4px;flex-wrap:wrap;margin-bottom:10px';
+      for(var di=1;di<fs.length;di++){var d=r2(fs[di]-fs[di-1]);drow.appendChild(mkEl('div',(d>=0?'+':'')+d,'dchip',''));}
+      wrap.appendChild(mkEl('div','Differences:','','font-size:12px;color:var(--tx3);margin-bottom:4px'));
+      wrap.appendChild(drow);
+    }
+  }
+
+  G.q.solution.forEach(function(s){
+    if(!s)return;
+    var isTk=s.indexOf('Trick:')=== 0||s.indexOf('IBPS')=== 0;
+    var isHl=s.indexOf('Identity:')=== 0||s.indexOf('Note:')=== 0;
+    wrap.appendChild(mkEl('div',s,'ss'+(isTk?' tk':isHl?' hl':''),''));
+  });
+  var ft=mkEl('div','','','margin-top:10px;padding-top:10px;border-top:1px solid var(--bd);font-size:13px;color:var(--tx3)');
+  ft.textContent='Answer: ';ft.appendChild(mkEl('span',String(G.q.ans),'','color:#4ca87c;font-weight:700;font-family:monospace'));
+  wrap.appendChild(ft);area.innerHTML='';area.appendChild(wrap);
+}
+
+function recStats(correct,speed){
+  G.stats.a++;if(correct)G.stats.c++;G.stats.spds.push(speed||G.tpq);
+  var acc=Math.round(G.stats.c/G.stats.a*100);
+  var avg=Math.round(G.stats.spds.reduce(function(a,b){return a+b;},0)/G.stats.spds.length);
+  document.getElementById('s-a').textContent=G.stats.a;
+  document.getElementById('s-c').textContent=G.stats.c;
+  document.getElementById('s-p').textContent=acc+'%';
+  document.getElementById('s-s').textContent=avg+'s';
+}
+function nextQ(){loadQ();}
+
+// ============================================================
+// MARK / HARD
+// ============================================================
+function togMk(){
+  if(!G.q)return;G.marked=!G.marked;var btn=document.getElementById('mkb');
+  btn.textContent=G.marked?'Marked':'Mark';btn.style.color=G.marked?'var(--gold)':'';btn.style.borderColor=G.marked?'var(--gold)':'';
+  if(G.marked){if(!MQ.find(function(q){return q.q===G.q.q;}))MQ.push(G.q);}
+  else MQ=MQ.filter(function(q){return q.q!==G.q.q;});
+  localStorage.setItem('ibps_mq',JSON.stringify(MQ));
+}
+function togHd(){
+  if(!G.q)return;G.hard=!G.hard;var btn=document.getElementById('hdb');
+  if(G.hard){btn.textContent='Saved!';saveHard(G.q);}
+  else{btn.textContent='Hard';HQ=HQ.filter(function(q){return q.q!==G.q.q;});localStorage.setItem('ibps_hq',JSON.stringify(HQ));}
+  updHB();
+}
+function saveHard(q){if(!q)return;if(!HQ.find(function(hq){return hq.q===q.q;})){HQ.push(q);localStorage.setItem('ibps_hq',JSON.stringify(HQ));updHB();}}
+function updHB(){var n=HQ.length;var b1=document.getElementById('hbh'),b2=document.getElementById('hbp');if(b1)b1.textContent=n?'Hard('+n+')':'Hard';if(b2)b2.textContent=n?'Hard Zone('+n+')':'Hard Zone';}
+function clrM(){MQ=[];localStorage.removeItem('ibps_mq');renderRev();}
+function clrH(){HQ=[];localStorage.removeItem('ibps_hq');updHB();renderRev();}
+
+// ============================================================
+// HARD ZONE
+// ============================================================
+var hzI=0;
+function renderHZ(){
+  var con=document.getElementById('hzcont'),ctr=document.getElementById('hzctr');
+  if(!HQ.length){ctr.textContent='';con.innerHTML='<div style="text-align:center;padding:40px 20px;color:var(--tx2)"><div style="font-size:2.5rem;margin-bottom:12px">&#127881;</div><div style="margin-bottom:16px">Hard Zone is empty!<br>Click Hard on any question to save it here.</div><button class="btn btn-g" onclick="goTo(\'practice\')">Back to Practice</button></div>';return;}
+  ctr.textContent=(hzI+1)+' / '+HQ.length;
+  var q=HQ[hzI];con.innerHTML='';
+  var card=document.createElement('div');card.className='card fi';
+  var tr=document.createElement('div');tr.style.cssText='display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap';
+  tr.appendChild(mkEl('span',q.type,'tag','background:rgba(201,168,76,.15);color:var(--gold)'));
+  tr.appendChild(mkEl('span',q.topic,'tag','background:var(--bg4);color:var(--tx3);font-size:11px'));
+  if(q.patternName)tr.appendChild(mkEl('span','Pattern: '+q.patternName,'pb',''));
+  card.appendChild(tr);card.appendChild(mkEl('div',q.q,'qb',''));
+  var og=document.createElement('div');og.className='og';
+  var sb=document.createElement('div');
+  q.opts.forEach(function(opt,i){
+    var btn=document.createElement('button');btn.className='ob';btn.setAttribute('data-opt',String(opt));
+    var lbl=mkEl('span',String.fromCharCode(65+i)+'.','','color:var(--tx3);margin-right:8px');
+    btn.appendChild(lbl);btn.appendChild(document.createTextNode(String(opt)));
+    btn.onclick=(function(o,b){return function(){
+      var ok=String(o)===String(q.ans);
+      og.querySelectorAll('.ob').forEach(function(bb){var bo=bb.getAttribute('data-opt');if(String(bo)===String(q.ans))bb.className='ob cor';else if(bb===b&&!ok)bb.className='ob wrg';else bb.className='ob dim';bb.onclick=null;});
+      var w=document.createElement('div');w.className='sb';
+      w.appendChild(mkEl('div','Solution','','font-weight:600;color:#4ca87c;margin-bottom:10px;font-size:14px'));
+      if(q.type==='Missing Number'||q.type==='Wrong Number'){
+        var fs=q.fullSeries||[];
+        if(fs.length){var row=document.createElement('div');row.style.cssText='display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px';fs.forEach(function(v,vi){var isKey=(q.type==='Wrong Number'&&vi===q.wrongIdx)||(q.type==='Missing Number'&&vi===q.hideIdx);row.appendChild(mkEl('div',String(v),'chip'+(isKey?' hi':''),''));});w.appendChild(row);}
+      }
+      q.solution.forEach(function(s){if(!s)return;var isTk=s.indexOf('Trick:')===0;w.appendChild(mkEl('div',s,'ss'+(isTk?' tk':''),''));});
+      var ft=mkEl('div','','','margin-top:10px;padding-top:10px;border-top:1px solid var(--bd);font-size:13px;color:var(--tx3)');ft.textContent='Answer: ';ft.appendChild(mkEl('span',String(q.ans),'','color:#4ca87c;font-weight:700;font-family:monospace'));w.appendChild(ft);
+      sb.innerHTML='';sb.appendChild(w);
+    };})(opt,btn);
+    og.appendChild(btn);
+  });
+  card.appendChild(og);card.appendChild(sb);con.appendChild(card);
+  var nav=document.createElement('div');nav.style.cssText='display:flex;justify-content:center;gap:8px;margin-top:16px';
+  if(hzI>0){var pv=mkEl('button','Prev','btn btn-o','');pv.onclick=function(){hzI--;renderHZ();};nav.appendChild(pv);}
+  if(hzI<HQ.length-1){var nx=mkEl('button','Next','btn btn-g','');nx.onclick=function(){hzI++;renderHZ();};nav.appendChild(nx);}
+  con.appendChild(nav);
+}
+
+// ============================================================
+// REVISION
+// ============================================================
+function renderRev(){
+  document.getElementById('rv-m').textContent=MQ.length+' question'+(MQ.length!==1?'s':'');
+  document.getElementById('rv-h').textContent=HQ.length+' question'+(HQ.length!==1?'s':'');
+
+  var sr=document.getElementById('simpref');sr.innerHTML='';
+  var simpTypes=[
+    ['Type 1','n1/d1 of A + n2/d2 of B = ?','Fraction of exact-divisible bases (most common)'],
+    ['Type 2','n1/d1 of A - n2/d2 of B = ?','Subtraction variant of Type 1'],
+    ['Type 3','A² + BxC - D² = ?','BODMAS with squares - Orders first'],
+    ['Type 4','A/B + C³ - √(D) = ?','Division + Cube³ + √'],
+    ['Type 5','√(AxB) + C² - D = ?','Factor under sqrt to simplify'],
+    ['Type 6','n/d of A + B² - √(C) = ?','Fraction + Power + √ combined'],
+    ['Type 7','(A+B)² - (A-B)² = ?','Identity = 4AB. Never expand manually!'],
+    ['Type 8','(A+B)² + (A-B)² = ?','Identity = 2(A²+B²). Use formula!'],
+    ['Type 9','A% of B + B% of A = ?','Always = 2AB/100. Symmetric property!'],
+    ['Type 10','3 parts: fraction + fraction + square','Mains level - solve each part separately'],
+  ];
+  var approxTypes=[
+    ['√(X.YZ) ~','Round to nearest perfect square (n²). Memorise 1² to 50².'],
+    ['(X.YZ)² ~','Round X.YZ to nearest integer, then square.'],
+    ['P% of X.YZ ~','Round X.YZ to nearest multiple of denominator.'],
+    ['X.YZ / P.QR ~','Round both to integers, then divide.'],
+    ['X.YZ x P.QR ~','Round both to integers, then multiply.'],
+    ['A% of X + B% of Y ~','Round each base separately, then compute each %.'],
+  ];
+
+  var sh=mkEl('div','Simplification Types (IBPS Pattern):','','font-weight:600;color:var(--tx);margin-bottom:8px;font-size:13px');
+  sr.appendChild(sh);
+  simpTypes.forEach(function(row){
+    var el=document.createElement('div');el.style.cssText='display:grid;grid-template-columns:60px 1fr 1.5fr;gap:6px;font-size:12px;padding:4px 0;border-bottom:1px solid var(--bd)';
+    el.appendChild(mkEl('span',row[0],'','color:var(--pur);font-weight:600'));
+    el.appendChild(mkEl('span',row[1],'','color:var(--gold);font-family:monospace'));
+    el.appendChild(mkEl('span',row[2],'','color:var(--tx3)'));
+    sr.appendChild(el);
+  });
+  var ah=mkEl('div','Approximation Types (IBPS Pattern):','','font-weight:600;color:var(--tx);margin:12px 0 8px;font-size:13px');
+  sr.appendChild(ah);
+  approxTypes.forEach(function(row){
+    var el=document.createElement('div');el.style.cssText='display:grid;grid-template-columns:160px 1fr;gap:6px;font-size:12px;padding:4px 0;border-bottom:1px solid var(--bd)';
+    el.appendChild(mkEl('span',row[0],'','color:var(--gold);font-family:monospace'));
+    el.appendChild(mkEl('span',row[1],'','color:var(--tx3)'));
+    sr.appendChild(el);
+  });
+
+  var fr=document.getElementById('fref');fr.innerHTML='';
+  var FM={2:50,3:33.33,4:25,5:20,6:16.67,7:14.28,8:12.5,9:11.11,10:10,11:9.09,12:8.33,13:7.69,14:7.14,15:6.67,16:6.25,17:5.88,18:5.55,19:5.26,20:5};
+  Object.keys(FM).forEach(function(d){fr.appendChild(mkEl('div','1/'+d+' = '+FM[d]+'%','ri',''));});
+
+  var dr=document.getElementById('dref');dr.innerHTML='';
+  FRACS.filter(function(f){return f.d<=9&&f.n>1;}).forEach(function(f){dr.appendChild(mkEl('div',f.n+'/'+f.d+' = '+f.pct+'%','ri bl',''));});
+
+  var pr=document.getElementById('patref');pr.innerHTML='';
+  var pats=[['AP - Constant Diff','T2-T1=T3-T2=constant'],['Double Difference','Diffs form an AP'],['GP - Constant Ratio','T2/T1=T3/T2=constant'],['xR+C','Multiply then add/subtract C'],['n² Pattern','Consecutive squares'],['n² +/- n','n²+n or n²-n'],['n³ Pattern','Consecutive cubes'],['Prime Diffs','Diffs: 2,3,5,7,11,13...'],['Fibonacci','Each = sum of prev two'],['Alternating Two','Separate odd/even positions'],['xR Alt +/-','Alternate add/subtract'],['Increasing Diff','Diffs form AP'],['Add Sq (1,4,9...)','Diffs are squares'],['Add Cu (1,8,27...)','Diffs are cubes'],['Incr Multiplier','x2,x3,x4... ratio+1']];
+  pats.forEach(function(p){
+    var el=document.createElement('div');el.style.cssText='display:flex;gap:8px;font-size:12px;padding:3px 0;border-bottom:1px solid var(--bd)';
+    el.appendChild(mkEl('span',p[0],'','color:var(--gold);min-width:160px;font-weight:500'));
+    el.appendChild(mkEl('span',p[1],'','color:var(--tx3)'));pr.appendChild(el);
+  });
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function goTo(name){
+  document.querySelectorAll('.sc').forEach(function(s){s.classList.remove('on');});
+  document.getElementById('sc-'+name).classList.add('on');
+  if(name==='practice'){loadQ();document.getElementById('p-lv').textContent=G.lv.toUpperCase();document.getElementById('p-md').style.display=G.mode==='timed'?'inline-block':'none';renderMT();}
+  if(name==='hardzone'){hzI=0;renderHZ();}
+  if(name==='revision')renderRev();
+  updHB();
+}
+
+function renderMT(){
+  var mods=[{id:'simplification',lb:'Simplification'},{id:'approximation',lb:'Approximation'},{id:'missing',lb:'Missing Number'},{id:'wrong',lb:'Wrong Number'}];
+  var con=document.getElementById('mtabs');con.innerHTML='';
+  mods.forEach(function(m){
+    var btn=mkEl('button',m.lb,'mt-btn'+(G.mod===m.id?' on':''),'');
+    btn.onclick=(function(id){return function(){G.mod=id;renderMT();loadQ();};})(m.id);
+    con.appendChild(btn);
+  });
+}
+
+function selMod(m){G.mod=m;['simplification','approximation','missing','wrong'].forEach(function(id){var el=document.getElementById('mb-'+id);if(el)el.className='lb'+(id===m?' ag':'');});}
+function selLv(l){G.lv=l;document.getElementById('lv-prelims').className='lb'+(l==='prelims'?' ab':'');document.getElementById('lv-mains').className='lb'+(l==='mains'?' ab':'');}
+function selMode(m){G.mode=m;document.getElementById('md-practice').className='lb'+(m==='practice'?' ap':'');document.getElementById('md-timed').className='lb'+(m==='timed'?' ap':'');document.getElementById('tset').style.display=m==='timed'?'block':'none';}
+function setTPQ(v){G.tpq=parseInt(v);document.getElementById('tpqv').textContent=v+'s';}
+function togDk(){G.dark=!G.dark;document.body.className=G.dark?'':'light';document.getElementById('dkb1').textContent=G.dark?'Light Mode':'Dark Mode';document.getElementById('dkb2').textContent=G.dark?'Light':'Dark';}
+
+// INIT
+selMod('simplification');selLv('prelims');selMode('practice');updHB();
+</script>
+</body>
+</html>
